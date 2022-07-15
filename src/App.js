@@ -3,8 +3,9 @@ import './styles.css';
 import DeckMenu from './Components/DeckMenu'
 
 function App(props) {
+
   return (
-    <Container className="App" m={2}>
+    <Container className="App" mt="5rem" maxW='3xl' align="center">
       <Text fontSize='3xl' color='pink1' >Welcome to my flashcard app. </Text>
       <DeckMenu />
       
