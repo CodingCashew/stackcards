@@ -13,42 +13,52 @@ flashcardController.getCards = (req, res, next) => {
       return next();
     })
     .catch((err) => next({
-      log: `Error in coffeeController.getCards: ${err}`,
+      log: `Error in flashcardController.getCards: ${err}`,
       message: { err: 'Error getting Cards' }
     }));
 }
 
+// add a deck to the database
+flashcardController.addDeck = (req, res, next) => {
+  console.log('req.params:', req.params)
+  const { deckName } = req.params;
+  console.log('deckName:', deckName)
+  const queryString = `CREATE TABLE ${deckName} (
+    CardId serial NOT NULL PRIMARY KEY,
+    Front varchar(255),
+    Back varchar(255)
+);`;
 
+  db.query(queryString)
+    .then((data) => {
+      // need to doublecheck this because I'm not sure if adding a deck returns anything
+      res.locals.added = data.rows[0];
+      // res.locals.added = `You have added ${deckName}`;
+      return next();
+    })
+    .catch((err) => next({
+      log: `Error in flashcardController.addDeck: ${err}`,
+      message: { err: 'Error adding deck' }
+    }));
+}
 
+// delete a deck fron the database
+flashcardController.deleteDeck = (req, res, next) => {
+  const { currentDeck } = req.params;
+  const queryString = `DROP TABLE ${currentDeck};`;
 
-
-
-
-
-
-
-
-// flashcardController.postCard: (req, res, next) => {
-//   const { message, password } = req.body;
-//   const query = 'INSERT INTO Message (message, password) VALUES ($1, $2) RETURNING *;';
-//   const params = [message, password];
-//   // const { message } = req.body;
-//   // const query = 'INSERT INTO Message (message) VALUES ($1) RETURNING *;';
-//   // const params = [message];
-
-//   try {
-//     const response = await db.query(query, params);
-//     res.locals.newMessage = response.rows[0];
-//     return next();
-//   }
-//   catch (error) {
-//     return next({
-//       log: 'Error in messageController.postMessage',
-//       status: 500,
-//       message: { err: `An error occured in messageController.postMessage ${error}` },
-//     });
-//   }
-// },
+  db.query(queryString)
+    .then((data) => {
+      // need to doublecheck this because I'm not sure if deleting a deck returns anything
+      res.locals.deleted = data.rows[0];
+      // res.locals.deleted = `You have deleted ${deckName}`;
+      return next();
+    })
+    .catch((err) => next({
+      log: `Error in flashcardController.deleteDeck: ${err}`,
+      message: { err: 'Error deleting deck' }
+    }));
+}
 
 
 

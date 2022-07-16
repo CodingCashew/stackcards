@@ -22,6 +22,14 @@ app.get('/getCards/:currentDeck', flashcardController.getCards, (req, res) => {
   return res.status(200).json(res.locals.cards);
 });
 
+app.post('/addDeck/:deckName', flashcardController.addDeck, (req, res) => {
+  return res.status(200).json(res.locals.added);
+});
+
+app.delete('/deleteDeck/:currentDeck', flashcardController.deleteDeck, (req, res) => {
+  return res.status(200).json(res.locals.deleted);
+});
+
 
 
 
