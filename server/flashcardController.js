@@ -2,6 +2,22 @@ const db = require('./FlashcardModel.js');
 
 const flashcardController = {};
 
+// get a list of all the decks (tables) in the database to use for the drop down menu
+flashcardController.getDecks = (req, res, next) => {
+
+  const queryString = `SELECT * FROM information_schema.tables WHERE table_schema = 'public'  AND table_name != 'pg_stat_statements';`;
+
+  db.query(queryString)
+    .then((data) => {
+      res.locals.decks = data.rows;
+      return next();
+    })
+    .catch((err) => next({
+      log: `Error in flashcardController.getDecks: ${err}`,
+      message: { err: 'Error getting decks' }
+    }));
+}
+
 // send all cards of the specified deck from the database to the front end
 flashcardController.getCards = (req, res, next) => {
   const { currentDeck } = req.params;
@@ -32,8 +48,8 @@ flashcardController.addDeck = (req, res, next) => {
   db.query(queryString)
     .then((data) => {
       // need to doublecheck this because I'm not sure if adding a deck returns anything
-      res.locals.added = data.rows[0];
-      // res.locals.added = `You have added ${deckName}`;
+      // res.locals.added = data.rows[0];
+      res.locals.added = `You have successfully added ${deckName}`;
       return next();
     })
     .catch((err) => next({
@@ -50,8 +66,8 @@ flashcardController.deleteDeck = (req, res, next) => {
   db.query(queryString)
     .then((data) => {
       // need to doublecheck this because I'm not sure if deleting a deck returns anything
-      res.locals.deleted = data.rows[0];
-      // res.locals.deleted = `You have deleted ${deckName}`;
+      // res.locals.deleted = data.rows[0];
+      res.locals.deleted = `You have successfully deleted ${currentDeck}`;
       return next();
     })
     .catch((err) => next({

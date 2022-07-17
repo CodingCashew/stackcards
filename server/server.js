@@ -17,6 +17,11 @@ app.get('/', (req, res) => {
 
 // middleware routes
 
+// get all decks in the database
+app.get('/getDecks', flashcardController.getDecks, (req, res) => {
+  return res.status(200).json(res.locals.decks);
+});
+
 // get all cards in selected deck
 app.get('/getCards/:currentDeck', flashcardController.getCards, (req, res) => {
   return res.status(200).json(res.locals.cards);
