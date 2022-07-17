@@ -1,31 +1,31 @@
 import { React, useState } from 'react';
-import { FormControl, FormLabel, Input, Button, Text } from '@chakra-ui/react';
+import { FormControl, FormLabel, Input, Button } from '@chakra-ui/react';
 import './DeckMenu';
 
-function AddDeck(props) {
-  // const { myDecks } = props
-  // const { setMyDecks } = props
+function AddDeck({setDecks, decks, setAddDeck, getDecks}) {
   const [deckName, setDeckName] = useState('')
 
   const handleSetDeckName = (e) => setDeckName(e.target.value)
 
   const addDeck = async () => {
-    fetch(`/addDeck/${deckName}`, { method: 'POST' })
-      .then((res) => res.json())
-      .then((data) => {
-        console.log(data)
-        // setMyDecks([...myDecks, deckName])
-      })
-      .catch((err) => console.log(err));
+    if (deckName !== '') {
+      fetch(`/addDeck/${deckName}`, { method: 'POST' })
+        .then((res) => res.json())
+        .then((data) => {
+          console.log(data)
+        })
+        .catch((err) => console.log(err));
+    }
+    setAddDeck(false);
   }
 
   return (
     <FormControl gridGap={4}>
       <FormLabel>Enter Deck Name:</FormLabel>
       <Input placeholder='Deck Name' onChange={handleSetDeckName} />
-      <Button color="white" bgColor="yellow2" type="submit" onClick={addDeck}>Add Deck</Button>
+      <Button color="white" bgColor="yellow2" mt={5} type="submit" onClick={addDeck}>Add Deck</Button>
     </FormControl>
   )
 }
 
-export default AddDeck
+export default AddDeck;
