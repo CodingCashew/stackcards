@@ -1,9 +1,51 @@
-import React from 'react';
+import { React, useState } from 'react';
 import { Container, Text, Flex } from '@chakra-ui/react';
-import { PlusSquareIcon, EditIcon, DeleteIcon } from '@chakra-ui/icons'
+// import { PlusSquareIcon, EditIcon, DeleteIcon } from '@chakra-ui/icons';
+import { PlusSquareIcon } from '@chakra-ui/icons';
+import AddCard from './AddCard';
+// import EditCard from './EditCard';
+// import DeleteCard from './DeleteCard';
 
 
-function CardContainer({cards, index, isShowingBack}) {
+function CardContainer({cards, currentCard, index, isShowingBack, setAddDeck, setDeleteDeck}) {
+  const [addCard, setAddCard] = useState(false);
+  // const [editCard, setEditCard] = useState(false);
+  // const [deleteCard, setDeleteCard] = useState(false);
+
+  // add a new card to the current deck in the database
+  const handleAddCard = () => {
+    if (addCard) setAddCard(false)
+    else {
+      setAddCard(true)
+      // setAddDeck(false)
+      // setDeleteDeck(false)
+      // setEditCard(false)
+      // setDeleteCard(false)
+    }
+  }
+  // edit the current card in the current deck
+  // const handleEditCard = () => {
+  //   if (editCard) setEditCard(false)
+  //   else {
+  //     // setEditCard(true)
+  //     setAddDeck(false)
+  //     setDeleteDeck(false)
+  //     setAddCard(false)
+  //     // setDeleteCard(false)
+  //   }
+  // }
+  // delete the current card in the current deck from the database
+  // const handleDeleteCard = () => {
+  //   if (deleteCard) setDeleteCard(false)
+  //   else {
+  //     // setDeleteCard(true)
+  //     setAddDeck(false)
+  //     setDeleteDeck(false)
+  //     // setEditCard(false)
+  //     setAddCard(false)
+  //   }
+  // }
+
   return (
 
     <Flex direction="column">
@@ -14,14 +56,17 @@ function CardContainer({cards, index, isShowingBack}) {
         {isShowingBack && <Text fontSize='3xl' color="pink2" p={8}>{cards[index].back}</Text>}
       </Container >
 
+      {addCard && <AddCard onClick={handleAddCard} setAddCard={setAddCard} />}
+      {/* {editCard && <EditCard onClick={handleEditCard}/>}
+      {deleteCard && <DeleteCard onClick={handleDeleteCard}/>} */}
+
       {/* Icons Container   */}
       <Flex justify="center" gridGap={4} p={4}>
-        <PlusSquareIcon w={5} h={5} color="gray" />
-        <EditIcon w={5} h={5} color="gray" />
-        <DeleteIcon w={5} h={5} color="gray" />
+        <PlusSquareIcon w={5} h={5} color="gray" onClick={handleAddCard} sx={{ cursor: "pointer" }} />
+        {/* <EditIcon w={5} h={5} color="gray" onClick={handleEditCard} sx={{ cursor: "pointer" }} />
+        <DeleteIcon w={5} h={5} color="gray" onClick={handleDeleteCard} sx={{ cursor: "pointer" }} /> */}
       </Flex>
     </Flex>
-    
   )
 }
 
