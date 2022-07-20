@@ -1,9 +1,9 @@
 import { React, useState, useEffect } from 'react';
 import AddDeck from './AddDeck';
 import DeleteDeck from './DeleteDeck';
-import AddCard from './AddCard';
-import EditCard from './EditCard';
-import DeleteCard from './DeleteCard';
+import setAddCard from './AddCard';
+// import EditCard from './EditCard';
+// import DeleteCard from './DeleteCard';
 import CardContainer from './CardContainer';
 import { ChevronDownIcon, PlusSquareIcon, DeleteIcon } from '@chakra-ui/icons'
 import { Container, Menu, MenuButton, MenuList, MenuItem, Button, Flex } from '@chakra-ui/react';
@@ -12,23 +12,23 @@ const hardcodedDecks = ['Spanish', 'Chinese', 'Arabic', 'French', 'Persian', 'Sw
 
 
 function DeckMenu(props) {
+  // list of decks in the database and the list above is a fallback
   const [decks, setDecks] = useState(hardcodedDecks)
+  const [cards, setCards] = useState([{front: 'almond', back: 'almendra'}]);
   const [currentDeck, setCurrentDeck] = useState(decks[0])
   // These keep track of whether the add or delete decks are popped out
   const [addDeck, setAddDeck] = useState(false)
   const [deleteDeck, setDeleteDeck] = useState(false)
-  // Might not need this? It's a default card.
-  const [cards, setCards] = useState([{front: 'almond', back: 'almendra'}]);
+  
   const [isShowingBack, setIsShowingBack] = useState(false)
   // This controls which card is showing.
   const [index, setIndex] = useState(0);
+  const currentCard = currentDeck[index]
+
   // These control if the add, edit, or delete card components are popped out; default is not showing.
-  const [addCard, setAddCard] = useState(false)
-  const [editCard, setEditCard] = useState(false)
-  const [deleteCard, setDeleteCard] = useState(false)
-  // reference for the current card
-  // Wait, do I need this or can I just use cards[index]?
-  const [currentCard, setCurrentCard] = useState(cards[index])
+  // const [addCard, setAddCard] = useState(false)
+  // const [editCard, setEditCard] = useState(false)
+  // const [deleteCard, setDeleteCard] = useState(false)
 
   // re-render the decks in the drop down menu
   useEffect(() => {
@@ -81,6 +81,9 @@ function DeckMenu(props) {
     else {
       setAddDeck(true)
       setDeleteDeck(false)
+      setAddCard(false)
+      // setEditCard(false)
+      // setDeleteCard(false)
     }
   }
 
@@ -90,24 +93,11 @@ function DeckMenu(props) {
     else {
       setDeleteDeck(true)
       setAddDeck(false)
+      setAddCard(false)
+      // setEditCard(false)
+      // setDeleteCard(false)
     }
   }
-
-  const handleAddCard = () => {
-    console.log('adding card...')
-  }
-
-  const handleEditCard = () => {
-    console.log('editing card...')
-  }
-
-  const handleDeleteCard = () => {
-    console.log('deleting card...')
-  }
-
-
-
-
 
   // button functions to control where you are in the deck and show the back of the current card
   const getPrevious = () => {
@@ -141,8 +131,8 @@ function DeckMenu(props) {
           </MenuList>
         </Menu>
         {/* Add and delete deck buttons */}
-        <PlusSquareIcon w={5} h={5} color="gray" onClick={handleAddDeck}  />
-        <DeleteIcon w={5} h={5} color="gray" onClick={handleDeleteDeck} />
+        <PlusSquareIcon w={5} h={5} color="gray" onClick={handleAddDeck} sx={{ cursor: "pointer" }} />
+        <DeleteIcon w={5} h={5} color="gray" onClick={handleDeleteDeck} sx={{ cursor: "pointer" }}/>
       </Flex>
 
       {/* Container that pops out when adding or deleting deck, or adding/deleting/editing cards */}
@@ -150,11 +140,7 @@ function DeckMenu(props) {
       {deleteDeck && <DeleteDeck currentDeck={currentDeck} setDeleteDeck={setDeleteDeck} deleteDeck={deleteDeck} getDecks={getDecks} />}
 
       {/* Card Container: Front and back of card, along with the three icons below the card */}
-      <CardContainer cards={cards} index={index} isShowingBack={isShowingBack} />
-      
-      {addCard && <AddCard onClick={handleAddCard}/>}
-      {editCard && <EditCard onClick={handleEditCard}/>}
-      {deleteCard && <DeleteCard onClick={handleDeleteCard}/>}
+      <CardContainer cards={cards} currentCard={currentCard} index={index} isShowingBack={isShowingBack}  />
 
       {/* Control Buttons Container */}
       <Flex justify="center" gridGap={3}>
