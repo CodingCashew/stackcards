@@ -3,6 +3,7 @@ const app = express();
 const path = require('path');
 const PORT = 8080;
 const flashcardController = require('./flashcardController');
+const deckController = require('./deckController');
 
 // parse incoming requests
 app.use(express.json());
@@ -18,8 +19,18 @@ app.get('/', (req, res) => {
 // middleware routes
 
 // get all decks in the database
-app.get('/getDecks', flashcardController.getDecks, (req, res) => {
+app.get('/getDecks', deckController.getDecks, (req, res) => {
   return res.status(200).json(res.locals.decks);
+});
+
+// add a deck to the database
+app.post('/addDeck/:deckName', deckController.addDeck, (req, res) => {
+  return res.status(200).json(res.locals.added);
+});
+
+// delete a deck from the database
+app.delete('/deleteDeck/:currentDeck', deckController.deleteDeck, (req, res) => {
+  return res.status(200).json(res.locals.deleted);
 });
 
 // get all cards in selected deck
@@ -27,17 +38,20 @@ app.get('/getCards/:currentDeck', flashcardController.getCards, (req, res) => {
   return res.status(200).json(res.locals.cards);
 });
 
-app.post('/addDeck/:deckName', flashcardController.addDeck, (req, res) => {
+// add a card to the current deck
+app.post('/addCard/:currentDeck', flashcardController.addCard, (req, res) => {
   return res.status(200).json(res.locals.added);
 });
 
-app.delete('/deleteDeck/:currentDeck', flashcardController.deleteDeck, (req, res) => {
-  return res.status(200).json(res.locals.deleted);
-});
+// edit the current card in the current deck
+// app.put('/editCard/:currentDeck/:cardObj', flashcardController.editCard, (req, res) => {
+//   return res.status(200).json(res.locals.edited);
+// });
 
-
-
-
+// delete the current card in the current deck
+// app.delete('/deleteCard/:currentDeck/:cardId', flashcardController.deleteCard, (req, res) => {
+//   return res.status(200).json(res.locals.deleted);
+// });
 
 // requests to an unknown route
 app.use('*', (req, res) => res.status(404).send('The page you are looking for does not exist'));

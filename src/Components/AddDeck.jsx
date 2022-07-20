@@ -6,7 +6,7 @@ function AddDeck({setDecks, decks, setAddDeck, getDecks}) {
   const [deckName, setDeckName] = useState('')
 
   const handleSetDeckName = (e) => setDeckName(e.target.value)
-
+  // won't add the deck if the input form is empty
   const addDeck = async () => {
     if (deckName !== '') {
       fetch(`/addDeck/${deckName}`, { method: 'POST' })

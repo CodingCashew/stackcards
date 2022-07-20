@@ -4,6 +4,7 @@ import './DeckMenu';
 
 
 function DeleteDeck({ currentDeck, setCurrentDeck, setDeleteDeck, getDecks, decks }) {
+  // closes the popover when the user clicks "cancel"
   const handleCancel = () => {
     setDeleteDeck(false);
   }
@@ -23,8 +24,8 @@ function DeleteDeck({ currentDeck, setCurrentDeck, setDeleteDeck, getDecks, deck
     <Container>
       <Text  fontSize='xl'>Are you absolutely sure you want to delete your <strong>{currentDeck}</strong> deck and ALL the cards in it? </Text>
       <Text fontSize='lg'>This action cannot be undone.</Text>
-      <Button onClick={handleCancel}>Cancel</Button>
-      <Button color="white" bgColor='yellow2' mt={5} onClick={deleteDeck} >Yes, DELETE this ENTIRE deck.</Button>
+      <Button mt={5} onClick={handleCancel}>Cancel</Button>
+      <Button color="white" bgColor='yellow2' mt={5} ml={3} onClick={deleteDeck} >Yes, DELETE this ENTIRE deck.</Button>
     </Container>
   )
 }
