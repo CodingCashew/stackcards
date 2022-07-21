@@ -17,8 +17,8 @@ function DeckMenu(props) {
   const [cards, setCards] = useState([{front: 'almond', back: 'almendra'}]);
   const [currentDeck, setCurrentDeck] = useState(decks[0])
   // These keep track of whether the add or delete decks are popped out
-  const [addDeck, setAddDeck] = useState(false)
-  const [deleteDeck, setDeleteDeck] = useState(false)
+  const [addingDeck, setAddingDeck] = useState(false)
+  const [deletingDeck, setDeletingDeck] = useState(false)
   
   const [isShowingBack, setIsShowingBack] = useState(false)
   // This controls which card is showing.
@@ -33,8 +33,8 @@ function DeckMenu(props) {
   // re-render the decks in the drop down menu
   useEffect(() => {
     getDecks();
-  }, [addDeck, deleteDeck]);
-  // }, [addDeck, DeleteDonClick={handleAddCard}eck]);
+  }, [addingDeck, deletingDeck]);
+  // }, [addingDeck, DeleteDonClick={handleAddCard}eck]);
 
   const getDecks = async () => {
     fetch('/getDecks')
@@ -57,7 +57,7 @@ function DeckMenu(props) {
   const handleChangeDeck = (e) => {
     setCurrentDeck(e.target.value);
     setIsShowingBack(false);
-    setDeleteDeck(false);
+    setDeletingDeck(false);
   }
 
   // whenever the currentDeck updates, call "getCards"
@@ -77,10 +77,10 @@ function DeckMenu(props) {
 
   // add a new deck to the database
   const handleAddDeck = () => {
-    if (addDeck) setAddDeck(false)
+    if (addingDeck) setAddingDeck(false)
     else {
-      setAddDeck(true)
-      setDeleteDeck(false)
+      setAddingDeck(true)
+      setDeletingDeck(false)
       setAddCard(false)
       // setEditCard(false)
       // setDeleteCard(false)
@@ -89,10 +89,10 @@ function DeckMenu(props) {
 
   // delete the current deck in the database
   const handleDeleteDeck = () => {
-    if (deleteDeck) setDeleteDeck(false)
+    if (deletingDeck) setDeletingDeck(false)
     else {
-      setDeleteDeck(true)
-      setAddDeck(false)
+      setDeletingDeck(true)
+      setAddingDeck(false)
       setAddCard(false)
       // setEditCard(false)
       // setDeleteCard(false)
@@ -136,8 +136,8 @@ function DeckMenu(props) {
       </Flex>
 
       {/* Container that pops out when adding or deleting deck, or adding/deleting/editing cards */}
-      {addDeck && <AddDeck setAddDeck={setAddDeck} />}
-      {deleteDeck && <DeleteDeck currentDeck={currentDeck} setDeleteDeck={setDeleteDeck} deleteDeck={deleteDeck} getDecks={getDecks} />}
+      {addingDeck && <AddDeck setAddingDeck={setAddingDeck} />}
+      {deletingDeck && <DeleteDeck currentDeck={currentDeck} setDeletingDeck={setDeletingDeck} deletingDeck={deletingDeck} getDecks={getDecks} />}
 
       {/* Card Container: Front and back of card, along with the three icons below the card */}
       <CardContainer cards={cards} currentCard={currentCard} index={index} isShowingBack={isShowingBack}  />

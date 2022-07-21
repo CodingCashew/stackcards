@@ -3,10 +3,10 @@ import { Container, Text, Button } from '@chakra-ui/react';
 import './DeckMenu';
 
 
-function DeleteDeck({ currentDeck, setCurrentDeck, setDeleteDeck, getDecks, decks }) {
+function DeleteDeck({ currentDeck, setCurrentDeck, setDeletingDeck, getDecks, decks }) {
   // closes the popover when the user clicks "cancel"
   const handleCancel = () => {
-    setDeleteDeck(false);
+    setDeletingDeck(false);
   }
   const deleteDeck = async () => {
     console.log('deleting...')
@@ -17,7 +17,7 @@ function DeleteDeck({ currentDeck, setCurrentDeck, setDeleteDeck, getDecks, deck
         getDecks();
       })
       .catch((err) => console.log(err));
-    setDeleteDeck(false);
+    setDeletingDeck(false);
   }
 
   return (

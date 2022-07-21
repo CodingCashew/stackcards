@@ -1,4 +1,4 @@
-import { Container, Text, Box } from '@chakra-ui/react';
+import { Container, Box } from '@chakra-ui/react';
 import './styles.css';
 import DeckMenu from './Components/DeckMenu'
 import TopBar from './Components/TopBar'

@@ -4,11 +4,6 @@ import './styles.css';
 import App from './App';
 import { ChakraProvider, extendTheme } from '@chakra-ui/react';
 
-// const config = {
-//   initialColorMode: 'light',
-//   useSystemColorMode: false,
-// }
-
 const theme = extendTheme({
   colors: {
     pink1: '#97266D',
@@ -22,8 +17,6 @@ const theme = extendTheme({
     mono: "Menlo, monospace",
   },
 })
-// const theme = extendTheme({ colors, config })
-
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
