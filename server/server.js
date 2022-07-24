@@ -49,9 +49,9 @@ app.post('/addCard/:currentDeck', flashcardController.addCard, (req, res) => {
 // });
 
 // delete the current card in the current deck
-// app.delete('/deleteCard/:currentDeck/:cardId', flashcardController.deleteCard, (req, res) => {
-//   return res.status(200).json(res.locals.deleted);
-// });
+app.delete('/deleteCard/:currentDeck/:cardId', flashcardController.deleteCard, (req, res) => {
+  return res.status(200).json(res.locals.deleted);
+});
 
 // requests to an unknown route
 app.use('*', (req, res) => res.status(404).send('The page you are looking for does not exist'));

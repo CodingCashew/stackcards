@@ -3,20 +3,29 @@ import { FormControl, FormLabel, Input, Button } from '@chakra-ui/react';
 import './CardContainer';
 import './DeckMenu'
 
-function AddCard({deckName, decks, index, setAddCard, handleAddCard, currentCard, currentDeck}) {
-  // const currentDeck = decks[index];
-  const [cardFront, setCardFront] = useState('');
-  const [cardBack, setCardBack] = useState('');
+function AddCard({ setAddingCard, currentDeck, getCards }) {
 
-  const handleSetCardFront = (e) => setCardFront(e.target.value)
-  const handleSetCardBack = (e) => setCardBack(e.target.value)
+  const [values, setValues] = useState({ front: '', back: '' });
+  const handleChangeCardData = e => {
+    const { name, value } = e.target
+    setValues({
+      ...values,
+      [name]:value,
+    })
+  }
+
+
+  // const handleSetCardFront = (e) => setCardFront(e.target.value)
+  // const handleSetCardBack = (e) => setCardBack(e.target.value)
 
   // const addCardToDb = () => {console.log('adding card to db...')}
   const addCardToDb = async () => {
-    if (cardFront && cardBack) {
-      fetch(`/addDeck/${currentDeck}`, {
+    console.log('adding card to database...')
+
+    if (values.front && values.back) {
+      fetch(`/addCard/${currentDeck}`, {
         method: 'POST',
-        body: JSON.stringify({ front: cardFront, back: cardBack })
+        body: JSON.stringify({ values })
       })
         .then((res) => res.json())
         .then((data) => {
@@ -24,19 +33,20 @@ function AddCard({deckName, decks, index, setAddCard, handleAddCard, currentCard
         })
         .catch((err) => console.log(err));
     }
-    setAddCard(false);
+    setAddingCard(false);
+    getCards();
   }
 
   const handleCancel = () => {
-    setAddCard(false);
+    setAddingCard(false);
   }
 
   return (
     <FormControl gridGap={4}>
       <FormLabel>Enter Card Front:</FormLabel>
-      <Input placeholder='Front of Card' value={cardBack} onChange={handleSetCardFront} />
+      <Input placeholder='Front of Card' name="front" value={values.front} onChange={handleChangeCardData} />
       <FormLabel>Enter Card Back:</FormLabel>
-      <Input placeholder='Back of Card' value={cardFront} onChange={handleSetCardBack} />
+      <Input placeholder='Back of Card' name="back" value={values.back} onChange={handleChangeCardData} />
       <Button color="white" bgColor="pink1" mt={5} type="submit" onClick={addCardToDb}>Add Card</Button>
       <Button mt={5} ml={2} onClick={handleCancel}>Cancel</Button>
     </FormControl>

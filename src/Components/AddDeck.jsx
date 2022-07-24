@@ -2,10 +2,11 @@ import { React, useState } from 'react';
 import { FormControl, FormLabel, Input, Button } from '@chakra-ui/react';
 import './DeckMenu';
 
-function AddDeck({setDecks, decks, setAddDeck, getDecks}) {
+function AddDeck({setDecks, decks, setAddingDeck, getDecks}) {
+  // stores the current user input for new deck name
   const [deckName, setDeckName] = useState('')
-
   const handleSetDeckName = (e) => setDeckName(e.target.value)
+
   // won't add the deck if the input form is empty
   const addDeck = async () => {
     if (deckName !== '') {
@@ -16,7 +17,9 @@ function AddDeck({setDecks, decks, setAddDeck, getDecks}) {
         })
         .catch((err) => console.log(err));
     }
-    setAddDeck(false);
+    setAddingDeck(false);
+    // setCurrentDeck(**)
+    getDecks();
   }
 
   return (
