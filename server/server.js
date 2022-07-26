@@ -49,7 +49,7 @@ app.post('/addCard/:currentDeck', flashcardController.addCard, (req, res) => {
 // });
 
 // delete the current card in the current deck
-app.delete('/deleteCard/:currentDeck/:cardId', flashcardController.deleteCard, (req, res) => {
+app.delete('/deleteCard/:currentDeck', flashcardController.deleteCard, (req, res) => {
   return res.status(200).json(res.locals.deleted);
 });
 

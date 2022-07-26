@@ -1,3 +1,3 @@
-# Flashcard App
+# MemTool
 
-This app allows you to add, create, edit, and delete flashcards and decks.
+This app allows you to add and delete flashcards and decks.

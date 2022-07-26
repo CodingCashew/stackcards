@@ -10,31 +10,26 @@ function AddCard({ setAddingCard, currentDeck, getCards }) {
     const { name, value } = e.target
     setValues({
       ...values,
-      [name]:value,
+      [name]: value,
     })
   }
 
-
-  // const handleSetCardFront = (e) => setCardFront(e.target.value)
-  // const handleSetCardBack = (e) => setCardBack(e.target.value)
-
-  // const addCardToDb = () => {console.log('adding card to db...')}
   const addCardToDb = async () => {
     console.log('adding card to database...')
-
     if (values.front && values.back) {
       fetch(`/addCard/${currentDeck}`, {
         method: 'POST',
-        body: JSON.stringify({ values })
+        body: JSON.stringify({ values }),
+        headers: { 'Content-Type': 'application/json' }
       })
         .then((res) => res.json())
         .then((data) => {
           console.log(data)
+          getCards();
         })
         .catch((err) => console.log(err));
     }
     setAddingCard(false);
-    getCards();
   }
 
   const handleCancel = () => {

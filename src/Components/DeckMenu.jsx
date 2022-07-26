@@ -18,9 +18,9 @@ function DeckMenu(props) {
   const [cards, setCards] = useState([{front: 'almond', back: 'almendra'}]);
   const [currentDeck, setCurrentDeck] = useState(decks[0])
 
-  // This controls which card is showing.
+  // Which card is showing and whether the back is revealed.
   const [index, setIndex] = useState(0);
-  const currentCard = currentDeck[index]
+  const currentCard = cards[index]
   const [isShowingBack, setIsShowingBack] = useState(false)
 
   //  whether the add or delete decks are popped out

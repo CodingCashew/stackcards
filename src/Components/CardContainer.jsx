@@ -1,4 +1,4 @@
-import { React, useState } from 'react';
+import { React } from 'react';
 import { Container, Text, Flex, Button } from '@chakra-ui/react';
 import { PlusSquareIcon, DeleteIcon } from '@chakra-ui/icons';
 import AddCard from './AddCard';
@@ -15,7 +15,7 @@ function CardContainer({cards, setAddingDeck, setDeletingDeck, addingCard, setAd
       setAddingDeck(false)
       setDeletingDeck(false)
       // setEditCard(false)
-      // setDeleteCard(false)
+      setDeletingCard(false)
     }
   }
   // edit the current card in the current deck
@@ -26,7 +26,7 @@ function CardContainer({cards, setAddingDeck, setDeletingDeck, addingCard, setAd
   //     setAddDeck(false)
   //     setDeleteDeck(false)
   //     setAddingCard(false)
-  //     // setDeleteCard(false)
+  //     // setDeletingCard(false)
   //   }
   // }
   // delete the current card in the current deck from the database
