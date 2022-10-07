@@ -4,6 +4,7 @@ const path = require('path');
 const PORT = 8080;
 const flashcardController = require('./flashcardController');
 const deckController = require('./deckController');
+require("dotenv").config();
 
 // parse incoming requests
 app.use(express.json());
