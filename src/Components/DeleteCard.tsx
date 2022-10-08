@@ -1,9 +1,9 @@
-import { React } from 'react';
+// import { React } from 'react';
 import { Text, Container, Button } from '@chakra-ui/react';
 import './CardContainer';
 import './DeckMenu'
 
-function DeleteCard({ setAddingCard, handleAddCard, currentCard, currentDeck, setDeletingCard, getCards }) {
+function DeleteCard( currentCard: {}, currentDeck: string, setDeletingCard: (arg0: boolean) => void, getCards: () => void ): JSX.Element {
   const cardid = currentCard.cardid
   const handleCancel = () => {
     setDeletingCard(false);

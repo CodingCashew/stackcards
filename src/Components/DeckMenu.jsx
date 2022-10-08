@@ -11,7 +11,7 @@ import { Container, Menu, MenuButton, MenuList, MenuItem, Button, Flex } from '@
 
 const hardcodedDecks = ['Spanish', 'Chinese', 'Arabic', 'French', 'Persian', 'Swedish', 'Turkish']
 
-function DeckMenu(props) {
+function DeckMenu() {
   // list of decks in the database
   const [decks, setDecks] = useState(hardcodedDecks)
   // cards in the current deck
@@ -109,7 +109,7 @@ function DeckMenu(props) {
       {/* Menu bar to change decks and deck icons */}
       <Flex justify="center" gridGap={4} p={4} align="center" >
         <Menu >
-          <MenuButton as={Button} rightIcon={<ChevronDownIcon />}>
+          <MenuButton as={Button} id="menuButton" rightIcon={<ChevronDownIcon />}>
             {currentDeck}
           </MenuButton>
           <MenuList>

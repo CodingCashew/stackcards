@@ -1,9 +1,9 @@
-import { React } from 'react';
+// import { React } from 'react';
 import { Container, Text, Button } from '@chakra-ui/react';
 import './DeckMenu';
 
 
-function DeleteDeck({ currentDeck, setCurrentDeck, setDeletingDeck, getDecks, decks }) {
+function DeleteDeck( currentDeck:string, setCurrentDeck: (arg0: boolean) => void, setDeletingDeck: (arg0: boolean) => void, getDecks: () => [], decks:string[] ): JSX.Element {
   // closes the popover when the user clicks "cancel"
   const handleCancel = () => {
     setDeletingDeck(false);

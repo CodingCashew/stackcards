@@ -1,4 +1,4 @@
-import { React, useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 
 import AddDeck from './AddDeck';
 import DeleteDeck from './DeleteDeck';
@@ -9,28 +9,33 @@ import CardContainer from './CardContainer';
 import { ChevronDownIcon, PlusSquareIcon, DeleteIcon } from '@chakra-ui/icons'
 import { Container, Menu, MenuButton, MenuList, MenuItem, Button, Flex } from '@chakra-ui/react';
 
-const hardcodedDecks = ['Spanish', 'Chinese', 'Arabic', 'French', 'Persian', 'Swedish', 'Turkish']
+const hardcodedDecks: string[] = ['Spanish', 'Chinese', 'Arabic', 'French', 'Persian', 'Swedish', 'Turkish']
 
-function DeckMenu(props) {
+interface Card {
+  front: string;
+  back: string;
+}
+
+function DeckMenu(): JSX.Element {
   // list of decks in the database
-  const [decks, setDecks] = useState(hardcodedDecks)
+  const [decks, setDecks] = useState<string[]>(hardcodedDecks)
   // cards in the current deck
-  const [cards, setCards] = useState([{front: 'almond', back: 'almendra'}]);
+  const [cards, setCards] = useState<Card[]>([{front: 'almond', back: 'almendra'}]);
   const [currentDeck, setCurrentDeck] = useState(decks[0])
 
   // Which card is showing and whether the back is revealed.
-  const [index, setIndex] = useState(0);
-  const currentCard = cards[index]
-  const [isShowingBack, setIsShowingBack] = useState(false)
+  const [index, setIndex] = useState<number>(0);
+  const currentCard: {} = cards[index];
+  const [isShowingBack, setIsShowingBack] = useState<boolean>(false)
 
   //  whether the add or delete decks are popped out
-  const [addingDeck, setAddingDeck] = useState(false)
-  const [deletingDeck, setDeletingDeck] = useState(false)
+  const [addingDeck, setAddingDeck] = useState<boolean>(false)
+  const [deletingDeck, setDeletingDeck] = useState<boolean>(false)
 
   // whether the add/edit/delete fields are popped out
-  const [addingCard, setAddingCard] = useState(false)
+  const [addingCard, setAddingCard] = useState<boolean>(false)
   // const [editingCard, setEditingCard] = useState(false)
-  const [deletingCard, setDeletingCard] = useState(false)
+  const [deletingCard, setDeletingCard] = useState<boolean>(false)
 
 
 
@@ -43,12 +48,12 @@ function DeckMenu(props) {
     fetch('/getDecks')
       .then((res) => res.json())
       .then((data) => {
-        const dataArray = getArrOfTableNames(data)
+        const dataArray: string[] = getArrOfTableNames(data)
         cards && setDecks(dataArray);
       })
   }
   // formats the data that we get back from the database
-  function getArrOfTableNames(arrayOfObjects) {
+  function getArrOfTableNames(arrayOfObjects: []) {
     return arrayOfObjects.reduce((acc, curr) => {
       acc.push(curr.table_name)
       return acc;
@@ -57,7 +62,7 @@ function DeckMenu(props) {
 
   // when the user clicks on a deck in the deck menu, assign it to be the "current deck" value
   // it also hides the back of the card and closes the delete menu if it is open
-  const handleChangeDeck = (e) => {
+  const handleChangeDeck = (e: React.ChangeEvent<HTMLInputElement>) => {
     setCurrentDeck(e.target.value);
     setIsShowingBack(false);
     setDeletingDeck(false);
@@ -109,7 +114,7 @@ function DeckMenu(props) {
       {/* Menu bar to change decks and deck icons */}
       <Flex justify="center" gridGap={4} p={4} align="center" >
         <Menu >
-          <MenuButton as={Button} rightIcon={<ChevronDownIcon />}>
+          <MenuButton as={Button} id="menuButton" rightIcon={<ChevronDownIcon />}>
             {currentDeck}
           </MenuButton>
           <MenuList>
@@ -122,6 +127,7 @@ function DeckMenu(props) {
         <PlusSquareIcon w={5} h={5} color="gray" onClick={handleAddDeck} sx={{ cursor: "pointer" }} />
         <DeleteIcon w={5} h={5} color="gray" onClick={handleDeleteDeck} sx={{ cursor: "pointer" }}/>
       </Flex>
+      
 
       {/* Container that pops out when adding or deleting deck, or adding/deleting/editing cards */}
       {addingDeck && <AddDeck setAddingDeck={setAddingDeck} getDecks={getDecks} />}

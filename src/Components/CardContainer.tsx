@@ -1,11 +1,11 @@
-import { React } from 'react';
+// import { React } from 'react';
 import { Container, Text, Flex, Button } from '@chakra-ui/react';
 import { PlusSquareIcon, DeleteIcon } from '@chakra-ui/icons';
 import AddCard from './AddCard';
 // import EditCard from './EditCard';
 import DeleteCard from './DeleteCard';
 
-function CardContainer({cards, setAddingDeck, setDeletingDeck, addingCard, setAddingCard, currentDeck, index, setIndex, currentCard, setDeletingCard, deletingCard, getCards, isShowingBack, setIsShowingBack }) {
+function CardContainer( cards:[], setAddingDeck: (arg0: boolean) => void, setDeletingDeck: (arg0: boolean) => void, addingCard:boolean, setAddingCard: (arg0: boolean) => void, currentDeck:string, index:number, setIndex: (arg0: number) => void, currentCard:{}, setDeletingCard: (arg0: boolean) => void, deletingCard:boolean, getCards: () => [], isShowingBack:boolean, setIsShowingBack: (arg0: boolean) => void ): JSX.Element {
 
   // add a new card to the current deck in the database
   const handleAddCard = () => {
@@ -80,12 +80,12 @@ function CardContainer({cards, setAddingDeck, setDeletingDeck, addingCard, setAd
         {/* <EditIcon w={5} h={5} color="gray" onClick={handleEditCard} sx={{ cursor: "pointer" }} /> */}
         <DeleteIcon w={5} h={5} color="gray" onClick={handleDeleteCard} sx={{ cursor: "pointer" }} />
       </Flex>
-     
-     <Flex justify="center" gridGap={3}>
-     <Button onClick={getPrevious} bgColor="pink1" color="white">Previous</Button>
-     <Button onClick={showBack} bgColor="yellow1" color="white">Show Back</Button>
-     <Button onClick={getNext} bgColor="pink1" color="white">Next</Button>
-   </Flex>
+
+      <Flex justify="center" gridGap={3}>
+      <Button onClick={getPrevious} bgColor="pink1" color="white">Previous</Button>
+      <Button onClick={showBack} bgColor="yellow1" color="white">Show Back</Button>
+      <Button onClick={getNext} bgColor="pink1" color="white">Next</Button>
+      </Flex>
     </Flex>
   )
 }

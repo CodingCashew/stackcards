@@ -3,6 +3,6 @@ import DeckMenu from './DeckMenu';
 
 it('renders the show back of card button', () => {
   render(<DeckMenu />);
-  const buttonElement = screen.getAllByRole('button')
+  const buttonElement = screen.getByRole('button')
   expect(buttonElement).toBeInTheDocument();
 })

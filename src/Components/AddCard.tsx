@@ -3,10 +3,10 @@ import { FormControl, FormLabel, Input, Button } from '@chakra-ui/react';
 import './CardContainer';
 import './DeckMenu'
 
-function AddCard({ setAddingCard, currentDeck, getCards }) {
+function AddCard( setAddingCard: (arg0: boolean) => void, currentDeck:string, getCards: () => void ): JSX.Element {
 
   const [values, setValues] = useState({ front: '', back: '' });
-  const handleChangeCardData = e => {
+  const handleChangeCardData = (e: { target: { name: any; value: any; }; }) => {
     const { name, value } = e.target
     setValues({
       ...values,

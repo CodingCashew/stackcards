@@ -4,7 +4,7 @@ import '@testing-library/jest-dom';
 
 it('renders the application title', () => {
   render(<App />);
-  const titleElement = screen.getByText('Tubī Cards')
+  const titleElement = screen.getByText('MemTool')
   expect(titleElement).toBeInTheDocument();
 });
 

@@ -1,9 +1,9 @@
 import React from 'react';
 import { Box, Text } from '@chakra-ui/react';
 
-function TopBar() {
+function TopBar(): JSX.Element {
   return (
-    <Box w="100%" bgColor="pink1" align="center">
+    <Box w="100%" bgColor="pink1" textAlign="center">
       <Text fontSize='3xl' color='white' >MemTool</Text>
     </Box>
   )

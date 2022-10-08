@@ -1,8 +1,8 @@
-import { React, useState } from 'react';
+import {  useState } from 'react';
 import { FormControl, FormLabel, Input, Button } from '@chakra-ui/react';
 import './DeckMenu';
 
-function AddDeck({setDecks, decks, setAddingDeck, getDecks}) {
+function AddDeck( setAddingDeck: (arg0: boolean) => void, getDecks: () => string[] ): JSX.Element {
   // stores the current user input for new deck name
   const [deckName, setDeckName] = useState('')
   const handleSetDeckName = (e) => setDeckName(e.target.value)
