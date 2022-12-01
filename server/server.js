@@ -45,9 +45,9 @@ app.post('/addCard/:currentDeck', flashcardController.addCard, (req, res) => {
 });
 
 // edit the current card in the current deck
-// app.put('/editCard/:currentDeck/:cardObj', flashcardController.editCard, (req, res) => {
-//   return res.status(200).json(res.locals.edited);
-// });
+app.put('/editCard/:currentDeck', flashcardController.editCard, (req, res) => {
+  return res.status(200).json(res.locals.edited);
+});
 
 // delete the current card in the current deck
 app.delete('/deleteCard/:currentDeck', flashcardController.deleteCard, (req, res) => {
