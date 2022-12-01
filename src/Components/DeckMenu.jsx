@@ -29,7 +29,7 @@ function DeckMenu() {
 
   // whether the add/edit/delete fields are popped out
   const [addingCard, setAddingCard] = useState(false)
-  // const [editingCard, setEditingCard] = useState(false)
+  const [editingCard, setEditingCard] = useState(false)
   const [deletingCard, setDeletingCard] = useState(false)
 
 
@@ -85,7 +85,7 @@ function DeckMenu() {
       setAddingDeck(true)
       setDeletingDeck(false)
       setAddingCard(false)
-      // setEditingCard(false)
+      setEditingCard(false)
       setDeletingCard(false)
     }
   }
@@ -97,7 +97,7 @@ function DeckMenu() {
       setDeletingDeck(true)
       setAddingDeck(false)
       setAddingCard(false)
-      // setEditingCard(false)
+      setEditingCard(false)
       setDeletingCard(false)
     }
   }
