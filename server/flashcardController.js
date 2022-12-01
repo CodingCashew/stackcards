@@ -53,4 +53,19 @@ flashcardController.deleteCard = (req, res, next) => {
     }));
 }
 
+flashcardController.editCard = (req, res, next) => {
+  const { currentDeck } = req.params;
+  const { front, back, cardid } = req.body;
+  const queryString = `UPDATE ${currentDeck} SET front = '${front}', back = '${back}' WHERE cardid = ${cardid};`;
+  db.query(queryString)
+    .then((data) => {
+      res.locals.edited = `You have successfully edited card id: "${cardid}" in ${currentDeck} to have front: ${front} and back: ${back}.`;
+      return next();
+    })
+    .catch((err) => next({
+      log: `Error in deckController.editCard: ${err}`,
+      message: { err: 'Error editing card' }
+    }));
+}
+
 module.exports = flashcardController;
