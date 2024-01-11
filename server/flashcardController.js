@@ -59,7 +59,7 @@ flashcardController.editCard = (req, res, next) => {
   const queryString = `UPDATE ${currentDeck} SET front = '${front}', back = '${back}' WHERE cardid = ${cardid};`;
   db.query(queryString)
     .then((data) => {
-      res.locals.edited = `You have successfully edited card id: "${cardid}" in ${currentDeck} to have front: ${front} and back: ${back}.`;
+      res.locals.edited = `You have successfully edited card id: "${cardid}" in ${currentDeck} to have front: '${front}' and back: '${back}'.`;
       return next();
     })
     .catch((err) => next({

@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './styles.css';
 // import App from './App';
-import App from './App.tsx';
+import App from './App.jsx';
 import { ChakraProvider, extendTheme } from '@chakra-ui/react';
 
 const theme = extendTheme({
