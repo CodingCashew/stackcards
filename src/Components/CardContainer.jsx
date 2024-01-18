@@ -9,6 +9,7 @@ import {
   ChevronRightIcon,
   ViewIcon,
   ViewOffIcon,
+  LockIcon,
 } from "@chakra-ui/icons";
 
 function CardContainer({
@@ -119,6 +120,9 @@ function CardContainer({
           {isShowingBack && (
             <Flex direction="column">
               <Text fontSize="3xl" color="secondaryDark" p={8}>
+                {cards[index].word}
+              </Text>
+              <Text fontSize="3xl" color="secondaryDark" p={8}>
                 {cards[index].sentence}
               </Text>
               <Text fontSize="3xl" color="secondaryDark" p={8}>
@@ -191,6 +195,9 @@ function CardContainer({
                 sx={{ cursor: "pointer" }}
               />
             </Flex>
+          )}
+          {cards[index] && cards[index].locked === true && (
+            <LockIcon w={5} h={5} color="gray" />
           )}
         </Flex>
       )}

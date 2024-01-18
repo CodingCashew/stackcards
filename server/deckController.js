@@ -22,8 +22,7 @@ deckController.getDecks = (req, res, next) => {
 // add a deck to the database
 deckController.addDeck = (req, res, next) => {
   const { deckName } = req.params;
-  // TODO: need to figure out how to account for decks with titles longer than one word
-  // const queryString = `CREATE TABLE '${deckName}' (
+
   const queryString = `CREATE TABLE ${deckName} (
     id serial NOT NULL,
     sentence_with_blank varchar(255) NOT NULL,
