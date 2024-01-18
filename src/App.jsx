@@ -8,7 +8,7 @@ function App({theme}) {
   return (
     <Box w="100%" h='100%' direction="column" >
       <TopBar />
-      <Container className="App" mt="3rem" maxW='3xl' align="center" bgColor="white" >
+      <Container className="App" mt={5} maxW='3xl' align="center" bgColor="white" >
         <DeckMenu />
       </Container>
     </Box>

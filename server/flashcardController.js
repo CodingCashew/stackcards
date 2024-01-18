@@ -21,15 +21,16 @@ flashcardController.getCards = (req, res, next) => {
 // add a card to the current deck in the database
 flashcardController.addCard = (req, res, next) => {
   const { currentDeck } = req.params;
-  const { front, back } = req.body.values;
-  const params = [front, back]
+  const { sentence, sentence_with_blank, word, infinitive, definition, synonyms, locked } = req.body.values;
+  const params = [sentence, sentence_with_blank, word, infinitive, definition, synonyms, locked]
   // TODO: need to figure out how to account for decks with titles longer than one word
   // const queryString = `CREATE TABLE '${deckName}' (
-  const queryString = `INSERT INTO ${currentDeck} (front, back) VALUES ($1, $2);`;
+  const queryString = `INSERT INTO ${currentDeck} (sentence, sentence_with_blank, word, infinitive, definition, synonyms, locked) VALUES ($1, $2, $3, $4, $5, $6, $7);`;
 
   db.query(queryString, params)
   .then((data) => {
-    res.locals.added = `You have successfully added front: ${front} and back: ${back} to ${currentDeck}`;
+    res.locals.added = `You have successfully added a new card!`;
+    // res.locals.added = `You have successfully added front: ${front} and back: ${back} to ${currentDeck}`;
     return next();
   })
   .catch((err) => next({

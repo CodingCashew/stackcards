@@ -25,11 +25,11 @@ let vocab = {
       word: "put together",
       definition: "put together",
       synonyms: "put together",
-      sentence_with_blanks: "integrate",
+      sentence_with_blank: "integrate",
       sentence: "We need to integrate the new feature into   the program.",
       vocabImg: "/vocab/anja-bauermann-VnIgQz6UqoE-unsplash.jpg",
       audioPath: "/dummy-audio.mp3",
-      locked: true,
+      locked: false,
     },
   ],
 };
@@ -103,6 +103,7 @@ function DeckMenu() {
       .then((res) => res.json())
       .then((cards) => {
         setCards(cards);
+        console.log(cards);
       })
       .catch((err) => console.log(err));
   };
@@ -154,15 +155,15 @@ function DeckMenu() {
           </MenuList>
         </Menu>
         {/* Add and delete deck buttons */}
-        {prettyDeckLabels[currentDeck] && (
-          <Flex gap={3}>
-            <PlusSquareIcon
-              w={5}
-              h={5}
-              color="gray"
-              onClick={handleAddDeck}
-              sx={{ cursor: "pointer" }}
-            />
+        <Flex gap={3}>
+          <PlusSquareIcon
+            w={5}
+            h={5}
+            color="gray"
+            onClick={handleAddDeck}
+            sx={{ cursor: "pointer" }}
+          />
+          {!prettyDeckLabels[currentDeck] && (
             <DeleteIcon
               w={5}
               h={5}
@@ -170,8 +171,8 @@ function DeckMenu() {
               onClick={handleDeleteDeck}
               sx={{ cursor: "pointer" }}
             />
-          </Flex>
-        )}
+          )}
+        </Flex>
       </Flex>
 
       {/* Container that pops out when adding or deleting deck, or adding/deleting/editing cards */}

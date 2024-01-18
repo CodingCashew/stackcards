@@ -9,6 +9,7 @@ const theme = extendTheme({
   colors: {
     primary: "#006AA7",
     secondary: "#e0bf00",
+    secondaryDark: "#ccad00",
     // secondary: "#d6b600",
     // secondary: "#FFCD00",
   },
