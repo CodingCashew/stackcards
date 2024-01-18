@@ -1,0 +1,20 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model verbs_present {
+  id                  Int     @id @default(autoincrement())
+  word                String  @db.VarChar(255)
+  sentence            String  @db.VarChar(255)
+  definition          String? @db.VarChar(255)
+  vocabimg            String? @db.VarChar(255)
+  audiopath           String? @db.VarChar(255)
+  infinitive          String? @db.VarChar(255)
+  sentence_with_blank String? @db.VarChar(255)
+  synonyms            String? @db.VarChar(255)
+}

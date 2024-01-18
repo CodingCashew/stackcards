@@ -10,5 +10,5 @@ test("renders the TopBar", () => {
 
 test("renders TopBar with correct styling", () => {
   render(<TopBar />);
-  expect(getByTestId("topbar")).toHaveStyle(`bgColor="pink1"`);
+  expect(getByTestId("topbar")).toHaveStyle(`bgColor="primary"`);
 });
