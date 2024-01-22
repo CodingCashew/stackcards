@@ -1,5 +1,14 @@
 import { React, useState, useEffect } from "react";
-import { FormControl, FormLabel, Input, Button, Text } from "@chakra-ui/react";
+import {
+  FormControl,
+  Input,
+  Button,
+  Text,
+  useToast,
+  FormLabel,
+  Flex,
+  FormErrorMessage
+} from "@chakra-ui/react";
 import "./CardContainer";
 import "./DeckMenu";
 import { prettyDeckLabels } from "./DeckMenu";
@@ -34,8 +43,10 @@ export default function EditCard({
     });
   };
 
+  const toast = useToast();
+
   const editCardInDb = async () => {
-    console.log(currentDeck);
+    console.log(values);
     if (values.sentence && values.sentence_with_blank && values.word) {
       console.log("values:", values);
       fetch(`/editCard/${currentDeck}`, {
@@ -49,7 +60,17 @@ export default function EditCard({
           getCards();
           setEditingCard(false);
         })
-        .catch((err) => console.log(err));
+        .catch((err) => {
+          console.log(err);
+          toast({
+            title: "Error",
+            description:
+              "An error occurred. Please make sure all required fields have valid inputs.",
+            status: "error",
+            duration: 5000,
+            isClosable: true,
+          });
+        });
     }
   };
 
@@ -58,7 +79,7 @@ export default function EditCard({
   };
 
   return (
-    <FormControl gridGap={4} mt={3}>
+    <Flex mt={3} direction="column">
       <Text color="primary">
         Edit current card in deck:{" "}
         <strong>
@@ -71,62 +92,82 @@ export default function EditCard({
         Any edits are not permanent, but could be modified or discarded in the
         future.
       </Text>
-      <Input
-        placeholder="Enter a sentence with a blank (missing word)"
-        name="sentence_with_blank"
-        value={values.sentence_with_blank}
-        onChange={handleChangeCardData}
-        my={3}
-        required
-      />
-      {/* <FormLabel>Enter the answer:</FormLabel> */}
-      <Input
-        placeholder="Answer (missing word)"
-        name="word"
-        value={values.word}
-        onChange={handleChangeCardData}
-        my={3}
-        required
-      />
-      {/* <FormLabel>Enter the Full Sentence:</FormLabel> */}
-      <Input
-        placeholder="Full Sentence"
-        name="sentence"
-        value={values.sentence}
-        onChange={handleChangeCardData}
-        my={3}
-        required
-      />
-      {/* <FormLabel>Enter the Infinitive:</FormLabel> */}
-      <Input
-        placeholder="Infinitive"
-        name="infinitive"
-        value={values.infinitive}
-        onChange={handleChangeCardData}
-        my={3}
-      />
-      {/* <FormLabel>Enter the Definition:</FormLabel> */}
-      <Input
-        placeholder="Definition"
-        name="definition"
-        value={values.definition}
-        onChange={handleChangeCardData}
-        my={3}
-      />
-      {/* <FormLabel>Enter synonym(s):</FormLabel> */}
-      <Input
-        placeholder="Synonyms"
-        name="synonyms"
-        value={values.synonyms}
-        onChange={handleChangeCardData}
-        my={3}
-      />
-      <Button color="white" bgColor="primary" mt={5} onClick={editCardInDb}>
-        Submit Changes
-      </Button>
-      <Button mt={5} ml={2} onClick={handleCancel}>
-        Cancel
-      </Button>
-    </FormControl>
+      <FormControl isInvalid={!values.sentence_with_blank}>
+        <FormLabel mt={5}>Enter a sentence with blanks:</FormLabel>
+        <Input
+          placeholder="Enter a sentence with a blank (missing word)"
+          name="sentence_with_blank"
+          value={values.sentence_with_blank}
+          onChange={handleChangeCardData}
+          isRequired={true}
+        />
+        {!values.sentence_with_blank && (
+          <FormErrorMessage>Sentence with blank is required.</FormErrorMessage>
+        )}
+        </FormControl>
+        <FormControl  isInvalid={!values.word}>
+        <FormLabel mt={5}>Enter the answer:</FormLabel>
+        <Input
+          placeholder="Answer (missing word)"
+          name="word"
+          value={values.word}
+          onChange={handleChangeCardData}
+          isRequired={true}
+        />
+        {!values.word && (
+          <FormErrorMessage>Answer is required.</FormErrorMessage>
+        )}
+        </FormControl>
+        <FormControl  isInvalid={!values.sentence}>
+        <FormLabel mt={5}>Enter the Full Sentence:</FormLabel>
+        <Input
+          errorBorderColor="crimson"
+          placeholder="Full Sentence"
+          name="sentence"
+          value={values.sentence}
+          onChange={handleChangeCardData}
+          isRequired={true}
+        />
+        {!values.sentence && (
+          <FormErrorMessage>Full sentence is required.</FormErrorMessage>
+        )}
+        </FormControl>
+        <FormLabel mt={5}>Enter the Infinitive:</FormLabel>
+        <Input
+          placeholder="Infinitive"
+          name="infinitive"
+          value={values.infinitive}
+          onChange={handleChangeCardData}
+        />
+        <FormLabel mt={5}>Enter the Definition:</FormLabel>
+        <Input
+          placeholder="Definition"
+          name="definition"
+          value={values.definition}
+          onChange={handleChangeCardData}
+        />
+        <FormLabel mt={5}>Enter synonym(s):</FormLabel>
+        <Input
+          placeholder="Synonyms"
+          name="synonyms"
+          value={values.synonyms}
+          onChange={handleChangeCardData}
+        />
+      {/* </FormControl> */}
+      <Flex justify="center">
+        <Button
+          color="white"
+          bgColor="primary"
+          
+          mt={5}
+          onClick={editCardInDb}
+        >
+          Submit Changes
+        </Button>
+        <Button mt={5} ml={2} onClick={handleCancel}>
+          Cancel
+        </Button>
+      </Flex>
+    </Flex>
   );
 }
