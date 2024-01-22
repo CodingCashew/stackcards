@@ -1,7 +1,8 @@
-import { React, useState } from "react";
-import { FormControl, FormLabel, Input, Button } from "@chakra-ui/react";
+import { React, useState, useEffect } from "react";
+import { FormControl, FormLabel, Input, Button, Text } from "@chakra-ui/react";
 import "./CardContainer";
 import "./DeckMenu";
+import { prettyDeckLabels } from "./DeckMenu";
 
 export default function EditCard({
   setEditingCard,
@@ -9,8 +10,22 @@ export default function EditCard({
   currentCard,
   getCards,
 }) {
-  const cardid = currentCard.cardid;
-  const [values, setValues] = useState({ front: "", back: "", cardid });
+  const id = currentCard.id;
+  const [values, setValues] = useState({
+    sentence_with_blank: "",
+    sentence: "",
+    synonyms: "",
+    infinitive: "",
+    word: "",
+    definition: "",
+    locked: false,
+    id: id,
+  });
+
+  useEffect(() => {
+    setValues(currentCard);
+  }, [currentCard]);
+
   const handleChangeCardData = (e) => {
     const { name, value } = e.target;
     setValues({
@@ -20,10 +35,11 @@ export default function EditCard({
   };
 
   const editCardInDb = async () => {
-    console.log("editing card in database...");
-    if (values.front && values.back) {
+    console.log(currentDeck);
+    if (values.sentence && values.sentence_with_blank && values.word) {
+      console.log("values:", values);
       fetch(`/editCard/${currentDeck}`, {
-        method: "POST",
+        method: "PUT",
         body: JSON.stringify({ values }),
         headers: { "Content-Type": "application/json" },
       })
@@ -31,10 +47,10 @@ export default function EditCard({
         .then((data) => {
           console.log(data);
           getCards();
+          setEditingCard(false);
         })
         .catch((err) => console.log(err));
     }
-    setEditingCard(false);
   };
 
   const handleCancel = () => {
@@ -42,28 +58,70 @@ export default function EditCard({
   };
 
   return (
-    <FormControl gridGap={4}>
-      <FormLabel>Enter New Card Front:</FormLabel>
+    <FormControl gridGap={4} mt={3}>
+      <Text color="primary">
+        Edit current card in deck:{" "}
+        <strong>
+          {prettyDeckLabels[currentDeck]
+            ? prettyDeckLabels[currentDeck]
+            : currentDeck}
+        </strong>
+      </Text>
+      <Text>
+        Any edits are not permanent, but could be modified or discarded in the
+        future.
+      </Text>
       <Input
-        placeholder="Front of Card"
-        name="front"
-        value={values.front}
+        placeholder="Enter a sentence with a blank (missing word)"
+        name="sentence_with_blank"
+        value={values.sentence_with_blank}
         onChange={handleChangeCardData}
+        my={3}
+        required
       />
-      <FormLabel>Enter New Card Back:</FormLabel>
+      {/* <FormLabel>Enter the answer:</FormLabel> */}
       <Input
-        placeholder="Back of Card"
-        name="back"
-        value={values.back}
+        placeholder="Answer (missing word)"
+        name="word"
+        value={values.word}
         onChange={handleChangeCardData}
+        my={3}
+        required
       />
-      <Button
-        color="white"
-        bgColor="primary"
-        mt={5}
-        type="submit"
-        onClick={editCardInDb}
-      >
+      {/* <FormLabel>Enter the Full Sentence:</FormLabel> */}
+      <Input
+        placeholder="Full Sentence"
+        name="sentence"
+        value={values.sentence}
+        onChange={handleChangeCardData}
+        my={3}
+        required
+      />
+      {/* <FormLabel>Enter the Infinitive:</FormLabel> */}
+      <Input
+        placeholder="Infinitive"
+        name="infinitive"
+        value={values.infinitive}
+        onChange={handleChangeCardData}
+        my={3}
+      />
+      {/* <FormLabel>Enter the Definition:</FormLabel> */}
+      <Input
+        placeholder="Definition"
+        name="definition"
+        value={values.definition}
+        onChange={handleChangeCardData}
+        my={3}
+      />
+      {/* <FormLabel>Enter synonym(s):</FormLabel> */}
+      <Input
+        placeholder="Synonyms"
+        name="synonyms"
+        value={values.synonyms}
+        onChange={handleChangeCardData}
+        my={3}
+      />
+      <Button color="white" bgColor="primary" mt={5} onClick={editCardInDb}>
         Submit Changes
       </Button>
       <Button mt={5} ml={2} onClick={handleCancel}>

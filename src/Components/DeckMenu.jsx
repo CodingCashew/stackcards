@@ -103,7 +103,6 @@ function DeckMenu() {
       .then((res) => res.json())
       .then((cards) => {
         setCards(cards);
-        console.log(cards);
       })
       .catch((err) => console.log(err));
   };
@@ -198,6 +197,8 @@ function DeckMenu() {
         currentDeck={currentDeck}
         setAddingCard={setAddingCard}
         addingCard={addingCard}
+        setEditingCard={setEditingCard}
+        editingCard={editingCard}
         index={index}
         setIndex={setIndex}
         currentCard={currentCard}

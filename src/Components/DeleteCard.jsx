@@ -10,8 +10,11 @@ function DeleteCard({
   currentDeck,
   setDeletingCard,
   getCards,
+  index,
+  setIndex,
+  deckLength
 }) {
-  const cardid = currentCard.cardid;
+  const id = currentCard.id;
   const handleCancel = () => {
     setDeletingCard(false);
   };
@@ -19,12 +22,16 @@ function DeleteCard({
   const deleteCardFromDb = async () => {
     fetch(`/deleteCard/${currentDeck}`, {
       method: "DELETE",
-      body: JSON.stringify({ cardid }),
+      body: JSON.stringify({ id }),
       headers: { "Content-Type": "application/json" },
     })
       .then((res) => res.json())
       .then((data) => {
         console.log("data:", data);
+        // if delete last card, update index to be new last card in deck
+        if (index === deckLength - 1) {
+          setIndex(index - 1)
+        }
         getCards();
       })
       .catch((err) => console.log(err));

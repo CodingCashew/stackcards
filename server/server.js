@@ -46,6 +46,8 @@ app.post('/addCard/:currentDeck', flashcardController.addCard, (req, res) => {
 
 // edit the current card in the current deck
 app.put('/editCard/:currentDeck', flashcardController.editCard, (req, res) => {
+  
+  console.log('in server')
   return res.status(200).json(res.locals.edited);
 });
 

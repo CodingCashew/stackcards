@@ -69,6 +69,11 @@ function CardContainer({
     if (index > 0) {
       setIndex(index - 1);
       setIsShowingBack(false);
+      setEditingCard(false)
+      setAddingCard(false)
+      setDeletingCard(false)
+      setAddingDeck(false)
+      setDeletingDeck(false)
     }
   };
   const showBack = () => {
@@ -78,6 +83,11 @@ function CardContainer({
     if (index < cards.length - 1) {
       setIndex(index + 1);
       setIsShowingBack(false);
+      setEditingCard(false)
+      setAddingCard(false)
+      setDeletingCard(false)
+      setAddingDeck(false)
+      setDeletingDeck(false)
     }
   };
 
@@ -86,7 +96,7 @@ function CardContainer({
       {/* Front of card */}
       <Container
         mt={5}
-        mb={7}
+        mb={4}
         minH="xs"
         borderRadius={6}
         boxShadow="3px 3px 5px 1px #ccc"
@@ -135,11 +145,7 @@ function CardContainer({
           )}
         </Flex>
       </Container>
-      {cards.length > 0 && (
-        <Text fontSize="lg" mb={1} color="primary">
-          {index + 1}/{cards.length}
-        </Text>
-      )}
+
       {addingCard && (
         <AddCard
           onClick={handleAddCard}
@@ -165,9 +171,16 @@ function CardContainer({
           getCards={getCards}
           currentDeck={currentDeck}
           currentCard={currentCard}
+          index={index}
+          setIndex={setIndex}
+          deckLength={cards.length}
         />
       )}
-
+      {cards.length > 0 && (
+        <Text fontSize="lg" mb={1}  mt={3} color="primary">
+          {index + 1}/{cards.length}
+        </Text>
+      )}
       {/* Icons Container   */}
       {currentDeck !== "Select a Deck" && (
         <Flex justify="center" gridGap={4} p={4}>
