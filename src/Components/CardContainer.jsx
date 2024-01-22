@@ -176,14 +176,15 @@ function CardContainer({
           deckLength={cards.length}
         />
       )}
-      {cards.length > 0 && (
-        <Text fontSize="lg" mb={1}  mt={3} color="primary">
+     
+      {/* Icons Container   */}
+      {currentDeck !== "Select a Deck" && (
+        <Flex justify="center" align="center" gridGap={4} p={4} mb={2}>
+           {cards.length > 0 && (
+        <Text fontSize="lg" color="primary">
           {index + 1}/{cards.length}
         </Text>
       )}
-      {/* Icons Container   */}
-      {currentDeck !== "Select a Deck" && (
-        <Flex justify="center" gridGap={4} p={4}>
           <PlusSquareIcon
             w={5}
             h={5}

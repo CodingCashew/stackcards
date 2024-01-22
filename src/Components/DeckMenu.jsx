@@ -64,6 +64,9 @@ function DeckMenu() {
   // re-render the decks in the drop down menu
   useEffect(() => {
     getDecks();
+    if (!currentCard || !currentCard.word) {
+      setIsShowingBack(false);
+    }
   }, [addingDeck, deletingDeck]);
 
   const getDecks = async () => {
@@ -176,7 +179,11 @@ function DeckMenu() {
 
       {/* Container that pops out when adding or deleting deck, or adding/deleting/editing cards */}
       {addingDeck && (
-        <AddDeck setAddingDeck={setAddingDeck} getDecks={getDecks} />
+        <AddDeck
+          setAddingDeck={setAddingDeck}
+          getDecks={getDecks}
+          setCurrentDeck={setCurrentDeck}
+        />
       )}
       {deletingDeck && (
         <DeleteDeck

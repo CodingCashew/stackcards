@@ -7,7 +7,7 @@ import {
   useToast,
   FormLabel,
   Flex,
-  FormErrorMessage
+  FormErrorMessage,
 } from "@chakra-ui/react";
 import "./CardContainer";
 import "./DeckMenu";
@@ -92,7 +92,7 @@ export default function EditCard({
         Any edits are not permanent, but could be modified or discarded in the
         future.
       </Text>
-      <FormControl isInvalid={!values.sentence_with_blank}>
+      <FormControl isRequired isInvalid={!values.sentence_with_blank}>
         <FormLabel mt={5}>Enter a sentence with blanks:</FormLabel>
         <Input
           placeholder="Enter a sentence with a blank (missing word)"
@@ -104,8 +104,8 @@ export default function EditCard({
         {!values.sentence_with_blank && (
           <FormErrorMessage>Sentence with blank is required.</FormErrorMessage>
         )}
-        </FormControl>
-        <FormControl  isInvalid={!values.word}>
+      </FormControl>
+      <FormControl isRequired isInvalid={!values.word}>
         <FormLabel mt={5}>Enter the answer:</FormLabel>
         <Input
           placeholder="Answer (missing word)"
@@ -117,11 +117,10 @@ export default function EditCard({
         {!values.word && (
           <FormErrorMessage>Answer is required.</FormErrorMessage>
         )}
-        </FormControl>
-        <FormControl  isInvalid={!values.sentence}>
+      </FormControl>
+      <FormControl isRequired isInvalid={!values.sentence}>
         <FormLabel mt={5}>Enter the Full Sentence:</FormLabel>
         <Input
-          errorBorderColor="crimson"
           placeholder="Full Sentence"
           name="sentence"
           value={values.sentence}
@@ -131,37 +130,30 @@ export default function EditCard({
         {!values.sentence && (
           <FormErrorMessage>Full sentence is required.</FormErrorMessage>
         )}
-        </FormControl>
-        <FormLabel mt={5}>Enter the Infinitive:</FormLabel>
-        <Input
-          placeholder="Infinitive"
-          name="infinitive"
-          value={values.infinitive}
-          onChange={handleChangeCardData}
-        />
-        <FormLabel mt={5}>Enter the Definition:</FormLabel>
-        <Input
-          placeholder="Definition"
-          name="definition"
-          value={values.definition}
-          onChange={handleChangeCardData}
-        />
-        <FormLabel mt={5}>Enter synonym(s):</FormLabel>
-        <Input
-          placeholder="Synonyms"
-          name="synonyms"
-          value={values.synonyms}
-          onChange={handleChangeCardData}
-        />
-      {/* </FormControl> */}
+      </FormControl>
+      <FormLabel mt={5}>Enter the Infinitive:</FormLabel>
+      <Input
+        placeholder="Infinitive"
+        name="infinitive"
+        value={values.infinitive}
+        onChange={handleChangeCardData}
+      />
+      <FormLabel mt={5}>Enter the Definition:</FormLabel>
+      <Input
+        placeholder="Definition"
+        name="definition"
+        value={values.definition}
+        onChange={handleChangeCardData}
+      />
+      <FormLabel mt={5}>Enter synonym(s):</FormLabel>
+      <Input
+        placeholder="Synonyms"
+        name="synonyms"
+        value={values.synonyms}
+        onChange={handleChangeCardData}
+      />
       <Flex justify="center">
-        <Button
-          color="white"
-          bgColor="primary"
-          
-          mt={5}
-          onClick={editCardInDb}
-        >
+        <Button color="white" bgColor="primary" mt={5} onClick={editCardInDb}>
           Submit Changes
         </Button>
         <Button mt={5} ml={2} onClick={handleCancel}>

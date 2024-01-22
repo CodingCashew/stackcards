@@ -1,5 +1,13 @@
 import { React, useState } from "react";
-import { FormControl, FormLabel, Input, Button, Text } from "@chakra-ui/react";
+import {
+  FormControl,
+  FormLabel,
+  Input,
+  Button,
+  Text,
+  Flex,
+  FormErrorMessage,
+} from "@chakra-ui/react";
 import "./CardContainer";
 import "./DeckMenu";
 import { prettyDeckLabels } from "./DeckMenu";
@@ -45,74 +53,91 @@ function AddCard({ setAddingCard, currentDeck, getCards }) {
   };
 
   return (
-    <FormControl gridGap={4}>
+    <Flex mt={3} direction="column">
+      <form>
       <Text color="primary">
-        Add a Card to{" "}
+        Add a Card to deck:{" "}
         <strong>
           {prettyDeckLabels[currentDeck]
             ? prettyDeckLabels[currentDeck]
             : currentDeck}
         </strong>
       </Text>
-      <Text>Any added cards are not locked, but could be modified or discarded in the future.</Text>
-      {/* <FormLabel>Enter Sentence with Blank:</FormLabel> */}
-      <Input
-        placeholder="Enter a sentence with a blank (missing word)"
-        name="sentence_with_blank"
-        value={values.sentence_with_blank}
-        onChange={handleChangeCardData}
-        my={3}
-        required
-      />
-      {/* <FormLabel>Enter the answer:</FormLabel> */}
-      <Input
-        placeholder="Answer (missing word)"
-        name="word"
-        value={values.word}
-        onChange={handleChangeCardData}
-        my={3}
-        required
-      />
-      {/* <FormLabel>Enter the Full Sentence:</FormLabel> */}
-      <Input
-        placeholder="Full Sentence"
-        name="sentence"
-        value={values.sentence}
-        onChange={handleChangeCardData}
-        my={3}
-        required
-      />
-      {/* <FormLabel>Enter the Infinitive:</FormLabel> */}
+      <Text>
+        Any added cards are not permanent, but could be modified or discarded in
+        the future.
+      </Text>
+      <FormControl isRequired>
+        <FormLabel mt={5}>Enter a sentence with blanks:</FormLabel>
+        <Input
+          errorBorderColor="crimson"
+          placeholder="Enter a sentence with a blank (missing word)"
+          name="sentence_with_blank"
+          value={values.sentence_with_blank}
+          onChange={handleChangeCardData}
+          isRequired={true}
+        />
+      </FormControl>
+      <FormControl isRequired >
+        <FormLabel mt={5}>Enter the answer:</FormLabel>
+        <Input
+          errorBorderColor="crimson"
+          placeholder="Answer (missing word)"
+          name="word"
+          value={values.word}
+          onChange={handleChangeCardData}
+          isRequired={true}
+        />
+        {/* {!values.word && (
+          <FormErrorMessage>Answer is required.</FormErrorMessage>
+        )} */}
+      </FormControl>
+      <FormControl isRequired >
+        <FormLabel mt={5}>Enter the Full Sentence:</FormLabel>
+        <Input
+          errorBorderColor="crimson"
+          placeholder="Full Sentence"
+          name="sentence"
+          value={values.sentence}
+          onChange={handleChangeCardData}
+          isRequired={true}
+        />
+        {/* {!values.sentence && (
+          <FormErrorMessage>Full sentence is required.</FormErrorMessage>
+        )} */}
+      </FormControl>
+      <FormLabel mt={5}>Enter the Infinitive:</FormLabel>
+
       <Input
         placeholder="Infinitive"
         name="infinitive"
         value={values.infinitive}
         onChange={handleChangeCardData}
-        my={3}
       />
-      {/* <FormLabel>Enter the Definition:</FormLabel> */}
+      <FormLabel mt={5}>Enter the Definition:</FormLabel>
       <Input
         placeholder="Definition"
         name="definition"
         value={values.definition}
         onChange={handleChangeCardData}
-        my={3}
       />
-      {/* <FormLabel>Enter synonym(s):</FormLabel> */}
+      <FormLabel mt={5}>Enter synonym(s):</FormLabel>
       <Input
         placeholder="Synonyms"
         name="synonyms"
         value={values.synonyms}
         onChange={handleChangeCardData}
-        my={3}
       />
-      <Button color="white" bgColor="primary" mt={5} onClick={addCardToDb}>
-        Add Card
-      </Button>
-      <Button mt={5} ml={2} onClick={handleCancel}>
-        Cancel
-      </Button>
-    </FormControl>
+      <Flex>
+        <Button color="white" bgColor="primary" mt={5} onClick={addCardToDb} type="submit">
+          Add Card
+        </Button>
+        <Button mt={5} ml={2} onClick={handleCancel}>
+          Cancel
+        </Button>
+      </Flex>
+      </form>
+    </Flex>
   );
 }
 

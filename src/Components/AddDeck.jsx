@@ -2,13 +2,17 @@ import { React, useState } from "react";
 import { FormControl, FormLabel, Input, Button } from "@chakra-ui/react";
 import "./DeckMenu";
 
-function AddDeck({ setDecks, decks, setAddingDeck, getDecks }) {
+function AddDeck({ setDecks, decks, setAddingDeck, getDecks, setCurrentDeck }) {
   // stores the current user input for new deck name
   const [deckName, setDeckName] = useState("");
   const handleSetDeckName = (e) => setDeckName(e.target.value);
   const handleCancel = () => {
     setAddingDeck(false);
   };
+
+  const validPattern = /^\w/
+
+  const hasPatternError = !validPattern.test(deckName)
 
   // won't add the deck if the input form is empty
   const addDeck = async () => {
@@ -21,14 +25,15 @@ function AddDeck({ setDecks, decks, setAddingDeck, getDecks }) {
         .catch((err) => console.log(err));
     }
     setAddingDeck(false);
-    // setCurrentDeck(**)
+    setCurrentDeck(deckName)
     getDecks();
   };
 
   return (
-    <FormControl gridGap={4}>
+    <form>
+    <FormControl gridGap={4} isRequired isInvalid={hasPatternError}>
       <FormLabel>Enter Deck Name:</FormLabel>
-      <Input placeholder="Deck Name" onChange={handleSetDeckName} />
+      <Input placeholder="Deck Name" pattern="([^\s][A-z0-9À-ž\s]+)" onChange={handleSetDeckName} />
       <Button
         color="white"
         bgColor="primary"
@@ -38,10 +43,11 @@ function AddDeck({ setDecks, decks, setAddingDeck, getDecks }) {
       >
         Add Deck
       </Button>
-      <Button mt={5} ml={3} onClick={handleCancel}>
+      <Button mt={5} ml={3} type="submit" onClick={handleCancel}>
         Cancel
       </Button>
     </FormControl>
+    </form>
   );
 }
 
