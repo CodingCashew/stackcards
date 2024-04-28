@@ -1,14 +1,14 @@
-import { React, useState, useEffect } from "react";
 import {
-  FormControl,
-  Input,
   Button,
+  Flex,
+  FormControl,
+  FormErrorMessage,
+  FormLabel,
+  Input,
   Text,
   useToast,
-  FormLabel,
-  Flex,
-  FormErrorMessage,
 } from "@chakra-ui/react";
+import { useEffect, useState } from "react";
 import "./CardContainer";
 import "./DeckMenu";
 import { prettyDeckLabels } from "./DeckMenu";
@@ -46,9 +46,7 @@ export default function EditCard({
   const toast = useToast();
 
   const editCardInDb = async () => {
-    console.log(values);
     if (values.sentence && values.sentence_with_blank && values.word) {
-      console.log("values:", values);
       fetch(`/editCard/${currentDeck}`, {
         method: "PUT",
         body: JSON.stringify({ values }),
@@ -56,12 +54,10 @@ export default function EditCard({
       })
         .then((res) => res.json())
         .then((data) => {
-          console.log(data);
           getCards();
           setEditingCard(false);
         })
         .catch((err) => {
-          console.log(err);
           toast({
             title: "Error",
             description:

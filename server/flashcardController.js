@@ -41,9 +41,9 @@ flashcardController.addCard = (req, res, next) => {
     synonyms,
     locked,
   ];
+
   // TODO: format deck titles longer than one word
 
-  // const queryString = `CREATE TABLE '${deckName}' (
   const queryString = `INSERT INTO ${currentDeck} (sentence, sentence_with_blank, word, infinitive, definition, synonyms, locked) VALUES ($1, $2, $3, $4, $5, $6, $7);`;
 
   db.query(queryString, params)
@@ -87,19 +87,9 @@ flashcardController.editCard = (req, res, next) => {
     definition,
     synonyms,
     locked,
-    id
+    id,
   } = req.body.values;
 
-  // const params = [
-  //   sentence,
-  //   sentence_with_blank,
-  //   word,
-  //   infinitive,
-  //   definition,
-  //   synonyms,
-  //   locked,
-  // ];
-  console.log('req.body: ', req.body.values)
   const queryString = `UPDATE ${currentDeck} SET sentence = '${sentence}', sentence_with_blank = '${sentence_with_blank}', word = '${word}', infinitive = '${infinitive}', definition = '${definition}', synonyms = '${synonyms}', locked = '${locked}' WHERE id = ${id};`;
   db.query(queryString)
     .then((data) => {

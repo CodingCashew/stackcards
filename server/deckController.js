@@ -50,7 +50,7 @@ deckController.addDeck = (req, res, next) => {
     );
 };
 
-// delete a deck fron the database
+// delete a deck from the database
 deckController.deleteDeck = (req, res, next) => {
   const { currentDeck } = req.params;
   const queryString = `DROP TABLE ${currentDeck};`;

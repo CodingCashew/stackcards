@@ -1,5 +1,4 @@
-import { React } from "react";
-import { Container, Text, Button } from "@chakra-ui/react";
+import { Button, Container, Text } from "@chakra-ui/react";
 import "./DeckMenu";
 import { prettyDeckLabels } from "./DeckMenu";
 
@@ -10,30 +9,25 @@ function DeleteDeck({
   getDecks,
   decks,
 }) {
-  // closes the popover when the user clicks "cancel"
   const handleCancel = () => {
     setDeletingDeck(false);
   };
   const deleteDeck = async () => {
-    console.log("deleting...");
     fetch(`/deleteDeck/${currentDeck}`, { method: "DELETE" })
       .then((res) => res.json())
       .then((data) => {
-        console.log("data:", data);
         getDecks();
       })
       .catch((err) => console.log(err));
     setDeletingDeck(false);
     getDecks();
-    console.log("decks:", decks);
     setCurrentDeck(decks[0]);
-    console.log("currentDeck after reassigning:", currentDeck);
   };
 
   return (
     <Container>
       <Text fontSize="xl">
-        Are you absolutely sure you want to DELETE your{" "}
+        Are you absolutely sure you want to DELETE the{" "}
         <strong>
           {prettyDeckLabels[currentDeck]
             ? prettyDeckLabels[currentDeck]

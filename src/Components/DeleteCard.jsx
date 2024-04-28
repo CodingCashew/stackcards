@@ -1,5 +1,4 @@
-import { React } from "react";
-import { Text, Container, Button } from "@chakra-ui/react";
+import { Button, Container, Text } from "@chakra-ui/react";
 import "./CardContainer";
 import "./DeckMenu";
 
@@ -12,7 +11,7 @@ function DeleteCard({
   getCards,
   index,
   setIndex,
-  deckLength
+  deckLength,
 }) {
   const id = currentCard.id;
   const handleCancel = () => {
@@ -27,10 +26,9 @@ function DeleteCard({
     })
       .then((res) => res.json())
       .then((data) => {
-        console.log("data:", data);
         // if delete last card, update index to be new last card in deck
         if (index === deckLength - 1) {
-          setIndex(index - 1)
+          setIndex(index - 1);
         }
         getCards();
       })

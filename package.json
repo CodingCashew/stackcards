@@ -1,5 +1,5 @@
 {
-  "name": "MemTool",
+  "name": "swedish-flashcards",
   "version": "0.1.0",
   "private": true,
   "main": "server/server.js",

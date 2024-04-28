@@ -1,52 +1,78 @@
-import { React, useState } from "react";
-import { FormControl, FormLabel, Input, Button } from "@chakra-ui/react";
+import {
+  Button,
+  FormControl,
+  FormErrorMessage,
+  FormLabel,
+  Input,
+  useToast,
+} from "@chakra-ui/react";
+import { useState } from "react";
 import "./DeckMenu";
 
 function AddDeck({ setDecks, decks, setAddingDeck, getDecks, setCurrentDeck }) {
-  // stores the current user input for new deck name
   const [deckName, setDeckName] = useState("");
-  const handleSetDeckName = (e) => setDeckName(e.target.value);
+  const handleSetDeckName = (e) => {
+    setDeckName(e.target.value);
+  };
   const handleCancel = () => {
     setAddingDeck(false);
   };
 
-  const validPattern = /^\w/
+  const toast = useToast();
 
-  const hasPatternError = !validPattern.test(deckName)
+  // const validPattern = /^\w\s/;
 
-  // won't add the deck if the input form is empty
+  // const hasPatternError = !validPattern.test(deckName) && deckName !== "";
+
   const addDeck = async () => {
     if (deckName !== "") {
       fetch(`/addDeck/${deckName}`, { method: "POST" })
         .then((res) => res.json())
         .then((data) => {
-          console.log(data);
+          setAddingDeck(false);
+          getDecks();
+          setCurrentDeck(deckName);
+          toast({
+            title: "Success",
+            description: `You have successfully added a new deck: ${deckName}`,
+            status: "success",
+            duration: 2000,
+            isClosable: true,
+          });
         })
-        .catch((err) => console.log(err));
+        .catch((err) => {
+          toast({
+            title: "Error",
+            description:
+              "An error occurred. Please make sure all required fields have valid inputs.",
+            status: "error",
+            duration: 6000,
+            isClosable: true,
+          });
+        });
     }
-    setAddingDeck(false);
-    setCurrentDeck(deckName)
-    getDecks();
   };
 
   return (
     <form>
-    <FormControl gridGap={4} isRequired isInvalid={hasPatternError}>
-      <FormLabel>Enter Deck Name:</FormLabel>
-      <Input placeholder="Deck Name" pattern="([^\s][A-z0-9À-ž\s]+)" onChange={handleSetDeckName} />
-      <Button
-        color="white"
-        bgColor="primary"
-        mt={5}
-        type="submit"
-        onClick={addDeck}
-      >
-        Add Deck
-      </Button>
-      <Button mt={5} ml={3} type="submit" onClick={handleCancel}>
-        Cancel
-      </Button>
-    </FormControl>
+      <FormControl gridGap={4} isRequired>
+        <FormLabel>Enter Deck Name:</FormLabel>
+        <Input
+          placeholder="Deck Name"
+          pattern="([^\s][A-z0-9À-ž\s]+)"
+          onChange={handleSetDeckName}
+          required={true}
+        />
+        {!deckName.length && (
+          <FormErrorMessage>Deck name is required.</FormErrorMessage>
+        )}
+        <Button color="white" bgColor="primary" mt={5} onClick={addDeck}>
+          Add Deck
+        </Button>
+        <Button mt={5} ml={3} onClick={handleCancel}>
+          Cancel
+        </Button>
+      </FormControl>
     </form>
   );
 }

@@ -1,34 +1,30 @@
-import { React, useState, useEffect } from "react";
-
-import AddDeck from "./AddDeck";
-import DeleteDeck from "./DeleteDeck";
-import CardContainer from "./CardContainer";
-
-// import setIsShowingBack from './CardContainer';
-
-import { ChevronDownIcon, PlusSquareIcon, DeleteIcon } from "@chakra-ui/icons";
+import { ChevronDownIcon, DeleteIcon, PlusSquareIcon } from "@chakra-ui/icons";
 import {
+  Button,
   Container,
+  Flex,
   Menu,
   MenuButton,
-  MenuList,
   MenuItem,
-  Button,
-  Flex,
+  MenuList,
 } from "@chakra-ui/react";
+import { useEffect, useState } from "react";
+import AddDeck from "./AddDeck";
+import CardContainer from "./CardContainer";
+import DeleteDeck from "./DeleteDeck";
 
 const initialDeck = ["Select a Deck"];
 
 let vocab = {
   cards: [
     {
-      word: "put together",
-      definition: "put together",
-      synonyms: "put together",
-      sentence_with_blank: "integrate",
-      sentence: "We need to integrate the new feature into   the program.",
-      vocabImg: "/vocab/anja-bauermann-VnIgQz6UqoE-unsplash.jpg",
-      audioPath: "/dummy-audio.mp3",
+      word: "",
+      definition: "",
+      synonyms: "",
+      sentence_with_blank: "",
+      sentence: "",
+      vocabImg: "",
+      audioPath: "",
       locked: false,
     },
   ],
@@ -46,22 +42,18 @@ function DeckMenu() {
   // cards in the current deck
   const [cards, setCards] = useState(vocab);
   const [currentDeck, setCurrentDeck] = useState(decks[0]);
-
-  // Which card is showing and whether the back is revealed.
   const [index, setIndex] = useState(0);
   const currentCard = cards[index];
   const [isShowingBack, setIsShowingBack] = useState(false);
-
   //  whether the add or delete decks are popped out
   const [addingDeck, setAddingDeck] = useState(false);
   const [deletingDeck, setDeletingDeck] = useState(false);
-
   // whether the add/edit/delete fields are popped out
   const [addingCard, setAddingCard] = useState(false);
   const [editingCard, setEditingCard] = useState(false);
   const [deletingCard, setDeletingCard] = useState(false);
 
-  // re-render the decks in the drop down menu
+  // re-render the deck list in the drop down menu
   useEffect(() => {
     getDecks();
     if (!currentCard || !currentCard.word) {
@@ -137,7 +129,7 @@ function DeckMenu() {
   return (
     <Container maxW="3xl">
       {/* Menu bar to change decks and deck icons */}
-      <Flex justify="center" gridGap={4} p={4} align="center">
+      <Flex justify="center" gridGap={4} p={2} align="center">
         <Menu>
           <MenuButton
             as={Button}
@@ -176,7 +168,6 @@ function DeckMenu() {
           )}
         </Flex>
       </Flex>
-
       {/* Container that pops out when adding or deleting deck, or adding/deleting/editing cards */}
       {addingDeck && (
         <AddDeck
