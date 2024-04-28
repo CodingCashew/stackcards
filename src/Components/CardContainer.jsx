@@ -190,7 +190,7 @@ function CardContainer({
         </Button>
       </Flex>
       {currentDeck !== "Select a Deck" && (
-        <Flex justify="center" align="center" gridGap={4} p={2} >
+        <Flex justify="center" align="center" gridGap={4} p={2}>
           <PlusSquareIcon
             w={5}
             h={5}
@@ -247,6 +247,7 @@ function CardContainer({
           currentDeck={currentDeck}
           currentCard={currentCard}
           index={index}
+          cards={cards}
           setIndex={setIndex}
           deckLength={cards.length}
         />

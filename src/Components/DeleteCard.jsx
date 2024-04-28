@@ -1,4 +1,5 @@
-import { Button, Container, Text } from "@chakra-ui/react";
+import { React } from "react";
+import { Text, Container, Button, useToast } from "@chakra-ui/react";
 import "./CardContainer";
 import "./DeckMenu";
 
@@ -18,6 +19,8 @@ function DeleteCard({
     setDeletingCard(false);
   };
 
+  const toast = useToast();
+
   const deleteCardFromDb = async () => {
     fetch(`/deleteCard/${currentDeck}`, {
       method: "DELETE",
@@ -27,13 +30,29 @@ function DeleteCard({
       .then((res) => res.json())
       .then((data) => {
         // if delete last card, update index to be new last card in deck
-        if (index === deckLength - 1) {
+        if (index === deckLength - 1 && index > 0) {
           setIndex(index - 1);
         }
         getCards();
+        setDeletingCard(false);
+        toast({
+          title: "Success",
+          description: `You have successfully deleted card from deck: ${currentDeck}`,
+          status: "success",
+          duration: 2000,
+          isClosable: true,
+        });
       })
-      .catch((err) => console.log(err));
-    setDeletingCard(false);
+      .catch((err) => {
+        console.log(err);
+        toast({
+          title: "Error",
+          description: "An error occurred.",
+          status: "error",
+          duration: 6000,
+          isClosable: true,
+        });
+      });
   };
 
   return (

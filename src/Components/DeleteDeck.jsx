@@ -1,4 +1,4 @@
-import { Button, Container, Text } from "@chakra-ui/react";
+import { Button, Container, Text, useToast } from "@chakra-ui/react";
 import "./DeckMenu";
 import { prettyDeckLabels } from "./DeckMenu";
 
@@ -12,17 +12,35 @@ function DeleteDeck({
   const handleCancel = () => {
     setDeletingDeck(false);
   };
+
+  const toast = useToast();
+
   const deleteDeck = async () => {
     fetch(`/deleteDeck/${currentDeck}`, { method: "DELETE" })
       .then((res) => res.json())
       .then((data) => {
         getDecks();
+        setDeletingDeck(false);
+        setCurrentDeck(decks[0]);
+        toast({
+          title: "Success",
+          description: `You have successfully deleted deck: ${currentDeck}`,
+          status: "success",
+          duration: 2000,
+          isClosable: true,
+        });
       })
-      .catch((err) => console.log(err));
-    setDeletingDeck(false);
-    getDecks();
-    setCurrentDeck(decks[0]);
-  };
+      .catch((err) => {
+        console.log(err);
+        toast({
+          title: "Error",
+          description: "An error occurred.",
+          status: "error",
+          duration: 6000,
+          isClosable: true,
+        });
+      });
+    };
 
   return (
     <Container>

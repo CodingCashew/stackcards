@@ -56,6 +56,13 @@ export default function EditCard({
         .then((data) => {
           getCards();
           setEditingCard(false);
+          toast({
+            title: "Success",
+            description: `You have successfully edited the card in deck: ${currentDeck}`,
+            status: "success",
+            duration: 2000,
+            isClosable: true,
+          });
         })
         .catch((err) => {
           toast({
