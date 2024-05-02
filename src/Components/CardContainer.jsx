@@ -8,7 +8,7 @@ import {
   ViewIcon,
   ViewOffIcon,
 } from "@chakra-ui/icons";
-import { Button, Container, Flex, Text } from "@chakra-ui/react";
+import { Button, Flex, Text } from "@chakra-ui/react";
 import AddCard from "./AddCard";
 import DeleteCard from "./DeleteCard";
 import EditCard from "./EditCard";
@@ -97,16 +97,21 @@ function CardContainer({
   };
 
   return (
-    <Flex direction="column">
+    <Flex direction="column" align="center" justify="center">
       {/* Front of card */}
-      <Container
-        mt={5}
-        mb={4}
+      <Flex
         minH="xs"
+        maxW="lg"
+        minW={{ base: "xs", sm: "sm", lg: "lg" }}
+        onClick={cards[0] ? showBack : ""}
         borderRadius={6}
         boxShadow="3px 3px 5px 1px #ccc"
+        alignItems="center"
+        justify="center"
+        p={5}
+        my={4}
       >
-        <Flex direction="column" justify="center" align="center" mt={10}>
+        <Flex direction="column" p={5}>
           {/* {((cards[index].vocabImg !== undefined) && (cards[index].vocabImg !== "./dummyPath")) && <Image
             src={cards[index].vocabImg}
             alt={cards[index].alt}
@@ -114,12 +119,17 @@ function CardContainer({
             maxW="100%"
           />} */}
           {cards.length > 0 && !isShowingBack && (
-            <Text fontSize="3xl" color="primary" align="center" p={8}>
+            <Text
+              fontSize="3xl"
+              color="primary"
+              align="center"
+              justify="center"
+            >
               {cards[index].sentence_with_blank}
             </Text>
           )}
           {cards.length <= 0 && currentDeck !== "Select a Deck" && (
-            <Text fontSize="2xl" align="center" p={12}>
+            <Text fontSize="2xl" align="center">
               This deck is empty. Click the plus icon below to add cards to this
               deck.
             </Text>
@@ -131,23 +141,34 @@ function CardContainer({
           )}
           {/* Back of card */}
           {isShowingBack && (
-            <Flex direction="column">
-              <Text fontSize="3xl" color="secondaryDark" p={8}>
-                {cards[index].word}
+            <Flex direction="row" gap={2}>
+              <Text fontSize="3xl" color="primary">
+                {cards[index].sentence_with_blank.slice(
+                  0,
+                  cards[index].sentence_with_blank.indexOf("_")
+                )}
+                <Text
+                  as="span"
+                  fontSize="3xl"
+                  fontWeight="500"
+                  color="secondaryDark"
+                >
+                  {cards[index].word}
+                </Text>
+                {cards[index].sentence_with_blank.slice(
+                  cards[index].sentence_with_blank.lastIndexOf("_") + 1
+                )}
               </Text>
-              <Text fontSize="3xl" color="secondaryDark" p={8}>
-                {cards[index].sentence}
-              </Text>
-              <Text fontSize="3xl" color="secondaryDark" p={8}>
+              {/* <Text fontSize="3xl" color="secondaryDark" p={8}>
                 {cards[index].infinitive}
               </Text>
               <Text fontSize="3xl" color="secondaryDark" p={8}>
                 {cards[index].synonyms}
-              </Text>
+              </Text> */}
             </Flex>
           )}
         </Flex>
-      </Container>
+      </Flex>
       {/* Icons Container   */}
       <Flex justify="center" mb={2}>
         {cards.length > 0 && (
@@ -174,9 +195,10 @@ function CardContainer({
           disabled={!cards[index]}
           _hover={{ color: "black", bgColor: "gray.200" }}
           aria-describedby="Show Back"
+          padding={isShowingBack ? "5" : ""}
         >
           {isShowingBack ? <ViewOffIcon mr={2} /> : <ViewIcon mr={2} />}
-          {isShowingBack ? "Hide" : "Show"}
+          {isShowingBack ? "Hide " : "Show"}
         </Button>
         <Button
           onClick={getNext}
