@@ -22,6 +22,14 @@ Some decks are locked to maintain their integrity and ensure accuracy. Only auth
 3. **Start the Server**: Run `npm run dev` to launch the server.
 4. **Launch the App**: Open your browser and navigate to `http://localhost:3000` to start learning Swedish!
 
+#### 🎬 Demo Gifs:
+![Present Tense Gif](https://github.com/CodingCashew/swedish-flashcards/assets/168357410/d7b1baf0-be24-43d9-bc6f-f9badb8a86ac)
+
+![Add Deck and Card Gif](https://github.com/CodingCashew/swedish-flashcards/assets/168357410/b463e8cc-0d30-40af-a334-ebb5d9ed37c8)
+
+![Delete Card and Deck Gif](https://github.com/CodingCashew/swedish-flashcards/assets/168357410/debe234e-8998-4b70-862e-1efd2f4f1259)
+
+
 #### 🤝🏽 Contributing:
 Contributions are welcome! If you have any ideas for improvement or would like to report a bug, feel free to open an issue or submit a pull request.
 
