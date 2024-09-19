@@ -1,9 +1,9 @@
-### Swedish Flashcards 🇸🇪
+### FrançaisFlash
 
-Welcome to Swedish Flashcards, your interactive language learning tool designed to help you master Swedish sentences in a fun and engaging way!
+Welcome to FrançaisFlash, your interactive language learning tool designed to help you master French vocabulary in a fun and engaging way!
 
 #### ✨Features:
-- **Learn Swedish Sentences**: Practice completing Swedish sentences by recalling the missing word.
+- **Learn French Vocabular**: Practice completing French sentences by recalling the missing word.
 - **Create Custom Decks**: Tailor your learning experience by creating your own decks with sentences that matter to you.
 - **Edit and Delete**: Modify or remove your custom decks and cards at any time to keep your learning fresh.
 - **Responsive Design**: Seamlessly switch between devices with our responsive design, ensuring a smooth experience on mobile and various screen sizes.
@@ -17,20 +17,12 @@ Some decks are locked to maintain their integrity and ensure accuracy. Only auth
 - **Database**: Utilizes PostgreSQL to securely store decks and cards, ensuring data integrity.
 
 #### ▶️ Getting Started:
-1. **Clone the Repository**: `git clone https://github.com/CodingCashew/swedish-flashcards.git`
+1. **Clone the Repository**: `git clone https://github.com/CodingCashew/francais-flash.git`
 2. **Install Dependencies**: Navigate to the project directory and run `npm install` to install required packages.
 3. **Start the Server**: Run `npm run dev` to launch the server.
-4. **Launch the App**: Open your browser and navigate to `http://localhost:3000` to start learning Swedish!
-
-#### 🎬 Demo Gifs:
-![Present Tense Gif](https://github.com/CodingCashew/swedish-flashcards/assets/168357410/d7b1baf0-be24-43d9-bc6f-f9badb8a86ac)
-
-![Add Deck and Card Gif](https://github.com/CodingCashew/swedish-flashcards/assets/168357410/b463e8cc-0d30-40af-a334-ebb5d9ed37c8)
-
-![Delete Card and Deck Gif](https://github.com/CodingCashew/swedish-flashcards/assets/168357410/debe234e-8998-4b70-862e-1efd2f4f1259)
-
+4. **Launch the App**: Open your browser and navigate to `http://localhost:3000` to start learning French!
 
 #### 🤝🏽 Contributing:
 Contributions are welcome! If you have any ideas for improvement or would like to report a bug, feel free to open an issue or submit a pull request.
 
-Start your Swedish learning journey today with Swedish Flashcards! Lycka till! 📚🇸🇪✨
+Start your French learning journey today with FrançaisFlash!
