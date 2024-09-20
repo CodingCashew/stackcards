@@ -72,24 +72,24 @@ function AddCard({ setAddingCard, currentDeck, getCards }) {
     <Flex direction="column">
       <form>
         <Flex align="center" justify="center" gap={2}>
-        <Text color="primary">
-          Add a Card to deck:{" "}
-          <strong>
-            {prettyDeckLabels[currentDeck]
-              ? prettyDeckLabels[currentDeck]
-              : currentDeck}
-          </strong>
-        </Text>
-        <Button variant="ghost" color="gray" ml={5} onClick={handleCancel}>
+          <Text color="primary">
+            Add a Card to deck:{" "}
+            <strong>
+              {prettyDeckLabels[currentDeck]
+                ? prettyDeckLabels[currentDeck]
+                : currentDeck}
+            </strong>
+          </Text>
+          <Button variant="ghost" color="gray" ml={5} onClick={handleCancel}>
             Cancel
           </Button>
-          </Flex>
+        </Flex>
         <Text>
           Any added cards are not permanent, but could be modified or discarded
           in the future.
         </Text>
         <FormControl isRequired>
-          <FormLabel mt={5}>Enter a sentence with blanks:</FormLabel>
+          <FormLabel mt={5}>Enter a sentence with a blank:</FormLabel>
           <Input
             errorBorderColor="crimson"
             placeholder="Enter a sentence with a blank (missing word)"
@@ -121,7 +121,7 @@ function AddCard({ setAddingCard, currentDeck, getCards }) {
             isRequired={true}
           />
         </FormControl>
-        <FormLabel mt={5}>Enter the Infinitive:</FormLabel>
+        {/* <FormLabel mt={5}>Enter the Infinitive:</FormLabel>
         <Input
           placeholder="Infinitive"
           name="infinitive"
@@ -141,7 +141,7 @@ function AddCard({ setAddingCard, currentDeck, getCards }) {
           name="synonyms"
           value={values.synonyms}
           onChange={handleChangeCardData}
-        />
+        /> */}
         <Flex>
           <Button color="white" bgColor="primary" mt={5} onClick={addCardToDb}>
             Add Card

@@ -96,7 +96,7 @@ export default function EditCard({
         future.
       </Text>
       <FormControl isRequired isInvalid={!values.sentence_with_blank}>
-        <FormLabel mt={5}>Enter a sentence with blanks:</FormLabel>
+        <FormLabel mt={5}>Enter a sentence with a blank:</FormLabel>
         <Input
           placeholder="Enter a sentence with a blank (missing word)"
           name="sentence_with_blank"
@@ -134,7 +134,7 @@ export default function EditCard({
           <FormErrorMessage>Full sentence is required.</FormErrorMessage>
         )}
       </FormControl>
-      <FormLabel mt={5}>Enter the Infinitive:</FormLabel>
+      {/* <FormLabel mt={5}>Enter the Infinitive:</FormLabel>
       <Input
         placeholder="Infinitive"
         name="infinitive"
@@ -154,7 +154,7 @@ export default function EditCard({
         name="synonyms"
         value={values.synonyms}
         onChange={handleChangeCardData}
-      />
+      /> */}
       <Flex justify="center">
         <Button color="white" bgColor="primary" mt={5} onClick={editCardInDb}>
           Submit Changes
