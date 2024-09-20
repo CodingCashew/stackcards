@@ -3,7 +3,7 @@
 Welcome to FrançaisFlash, your interactive language learning tool designed to help you master French vocabulary in a fun and engaging way!
 
 #### ✨Features:
-- **Learn French Vocabular**: Practice completing French sentences by recalling the missing word.
+- **Learn French Vocabulary**: Practice completing French sentences by recalling the missing word.
 - **Create Custom Decks**: Tailor your learning experience by creating your own decks with sentences that matter to you.
 - **Edit and Delete**: Modify or remove your custom decks and cards at any time to keep your learning fresh.
 - **Responsive Design**: Seamlessly switch between devices with our responsive design, ensuring a smooth experience on mobile and various screen sizes.

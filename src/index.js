@@ -6,9 +6,10 @@ import App from "./App.jsx";
 
 const theme = extendTheme({
   colors: {
-    primary: "#006AA7",
-    secondary: "#e0bf00",
-    secondaryDark: "#ccad00",
+    primary: "#002654",
+    secondary: "#CD1127",
+    secondaryDark: "#a10e1f",
+    grey: "#4d4d4d",
   },
   fonts: {
     body: "system-ui, sans-serif",

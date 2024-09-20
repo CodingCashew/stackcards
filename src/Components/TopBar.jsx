@@ -2,11 +2,11 @@ import { Box, Flex, Image, Text } from "@chakra-ui/react";
 
 function TopBar() {
   return (
-    <Box w="100%" bgColor="primary" align="center" data-testid="topbar">
+    <Box w="100%" bgColor="grey" align="center" data-testid="topbar">
       <Flex gap={5} align="center" justify="center">
         <Image src="/favicon.jpg" height="30px" />
         <Text fontSize="3xl" color="white">
-          Swedish Flashcards
+          FrançaisFlash
         </Text>
       </Flex>
     </Box>

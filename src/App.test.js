@@ -4,7 +4,7 @@ import '@testing-library/jest-dom';
 
 it('renders the application title', () => {
   render(<App />);
-  const titleElement = screen.getByText('Swedish Flashcards')
+  const titleElement = screen.getByText('FrançaisFlash')
   expect(titleElement).toBeInTheDocument();
 });
 
