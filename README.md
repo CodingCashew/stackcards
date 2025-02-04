@@ -1,11 +1,11 @@
-### FrançaisFlash
+### StackCards
 
-Welcome to FrançaisFlash, your interactive language learning tool designed to help you master French vocabulary in a fun and engaging way!
+Welcome to StackCards, your interactive learning tool designed to help you master any subject through customizable flashcards and interactive practice! 🚀
 
 #### ✨Features:
-- **Learn French Vocabulary**: Practice completing French sentences by recalling the missing word.
-- **Create Custom Decks**: Tailor your learning experience by creating your own decks with sentences that matter to you.
-- **Edit and Delete**: Modify or remove your custom decks and cards at any time to keep your learning fresh.
+- **Customizable Decks**: Create and manage your own decks to tailor your learning experience.
+- **Interactive Flashcards**: Test your knowledge by recalling the missing information in a fun and engaging way.
+- **Edit and Delete**: Modify or remove your custom decks and cards at any time to keep your content up-to-date.
 - **Responsive Design**: Seamlessly switch between devices with our responsive design, ensuring a smooth experience on mobile and various screen sizes.
 
 #### 🔒 Locked Decks:
@@ -17,12 +17,12 @@ Some decks are locked to maintain their integrity and ensure accuracy. Only auth
 - **Database**: Utilizes PostgreSQL to securely store decks and cards, ensuring data integrity.
 
 #### ▶️ Getting Started:
-1. **Clone the Repository**: `git clone https://github.com/CodingCashew/francais-flash.git`
+1. **Clone the Repository**: `git clone https://github.com/CodingCashew/stackcards.git`
 2. **Install Dependencies**: Navigate to the project directory and run `npm install` to install required packages.
 3. **Start the Server**: Run `npm run dev` to launch the server.
-4. **Launch the App**: Open your browser and navigate to `http://localhost:3000` to start learning French!
+4. **Launch the App**: Open your browser and navigate to `http://localhost:3000` in your browser to start learning!
 
 #### 🤝🏽 Contributing:
 Contributions are welcome! If you have any ideas for improvement or would like to report a bug, feel free to open an issue or submit a pull request.
 
-Start your French learning journey today with FrançaisFlash!
+Start building your knowledge with StackCards today! 📚✨
